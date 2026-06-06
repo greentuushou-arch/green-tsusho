@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社GREEN通商 | ECコンサルティング・デザイン</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #2d6a4f;
+      --green-mid:  #40916c;
+      --green-light:#74c69d;
+      --accent:     #52b788;
+      --bg:         #f8faf9;
+      --text:       #1a1a1a;
+      --muted:      #5a6e63;
+      --border:     #d8e8df;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--green-mid); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--green); }
+
+    /* HERO */
+    .hero {
+      padding: 160px 24px 100px;
+      text-align: center;
+      background: linear-gradient(160deg, #e8f5ee 0%, #f8faf9 60%);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--green);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .hero p {
+      max-width: 580px;
+      margin: 0 auto 40px;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 36px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background .2s, transform .15s;
+    }
+    .btn:hover { background: var(--green-mid); transform: translateY(-2px); }
+
+    /* SECTION COMMON */
+    section { padding: 88px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 0.97rem;
+      margin-bottom: 52px;
+    }
+
+    /* SERVICES */
+    #services { background: #fff; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(45,106,79,.12);
+      transform: translateY(-4px);
+    }
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 10px;
+      background: #e8f5ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+    .card h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* STRENGTHS */
+    #strengths { background: var(--bg); }
+    .strengths-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .strength-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .strength-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green-light);
+      line-height: 1;
+      min-width: 48px;
+    }
+    .strength-item h4 {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+    .strength-item p {
+      font-size: 0.87rem;
+      color: var(--muted);
+    }
+
+    /* FLOW */
+    #flow { background: #fff; }
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+    .flow-step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      padding-bottom: 40px;
+      position: relative;
+    }
+    .flow-step:last-child { padding-bottom: 0; }
+    .flow-step::before {
+      content: '';
+      position: absolute;
+      left: 38px;
+      top: 52px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .flow-step:last-child::before { display: none; }
+    .step-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-body h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 6px;
+      padding-top: 12px;
+    }
+    .step-body p { font-size: 0.9rem; color: var(--muted); }
+
+    /* COMPANY */
+    #company { background: var(--bg); }
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+      max-width: 680px;
+    }
+    .company-table tr { border-bottom: 1px solid var(--border); }
+    .company-table th {
+      text-align: left;
+      padding: 16px 24px 16px 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green);
+      width: 160px;
+      vertical-align: top;
+    }
+    .company-table td {
+      padding: 16px 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT CTA */
+    #contact {
+      background: var(--green);
+      text-align: center;
+      padding: 88px 24px;
+    }
+    #contact h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    #contact p { color: var(--green-light); margin-bottom: 36px; font-size: 0.97rem; }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--green);
+      text-decoration: none;
+      padding: 14px 40px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-white:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.82rem;
+    }
+    footer a { color: #aaa; text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .flow-step { grid-template-columns: 60px 1fr; }
+      .flow-step::before { left: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav>
+    <a href="#" class="logo">GREEN<span>通商</span></a>
+    <ul>
+      <li><a href="#services">サービス</a></li>
+      <li><a href="#strengths">強み</a></li>
+      <li><a href="#flow">フロー</a></li>
+      <li><a href="#company">会社概要</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">EC Consulting &amp; Design</div>
+  <h1>売れるECを、<br>デザインで実現する。</h1>
+  <p>株式会社GREEN通商は、ECコンサルティングとデザインの力で、お客様のオンラインビジネスを成長させます。</p>
+  <a href="#contact" class="btn">無料相談はこちら</a>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">Services</div>
+    <h2 class="section-title">事業内容・サービス</h2>
+    <p class="section-desc">ECサイトの立ち上げから運用改善、ブランドデザインまで、ワンストップでサポートします。</p>
+    <div class="services-grid">
+      <div class="card">
+        <div class="card-icon">🛒</div>
+        <h3>ECコンサルティング</h3>
+        <p>楽天市場・Amazon・Yahoo!ショッピングなど主要モールへの出店支援、売上改善戦略の立案・実行まで総合的にサポートします。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>ECデザイン制作</h3>
+        <p>商品ページ・バナー・ストアデザインを、コンバージョン率を意識したクオリティで制作。ブランドの世界観を大切にします。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>データ分析・改善提案</h3>
+        <p>アクセス解析・売上データをもとに課題を特定し、具体的な改善施策を提案・実行します。PDCAサイクルで成果を出し続けます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <h3>商品撮影・画像加工</h3>
+        <p>高品質な商品写真の撮影から、EC向けの画像加工・レタッチまで対応。魅力的なビジュアルで購買意欲を高めます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📣</div>
+        <h3>広告・プロモーション</h3>
+        <p>RPP広告・スポンサープロダクト広告の運用代行、SNSを活用したプロモーション施策で集客を強化します。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>自社ECサイト構築</h3>
+        <p>Shopify・BASE・STORESを活用した自社ECサイトの構築・デザインカスタマイズ。独自ブランドの確立を支援します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section id="strengths">
+  <div class="container">
+    <div class="section-label">Why GREEN通商</div>
+    <h2 class="section-title">選ばれる理由</h2>
+    <p class="section-desc">コンサルティングとデザインを一体で提供するからこそ、戦略と実装が一貫しています。</p>
+    <div class="strengths-list">
+      <div class="strength-item">
+        <div class="strength-num">01</div>
+        <div>
+          <h4>コンサル×デザインの一貫体制</h4>
+          <p>戦略立案からビジュアル制作まで社内完結。スピードとクオリティを両立します。</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">02</div>
+        <div>
+          <h4>実績に基づく改善提案</h4>
+          <p>多数のEC運営実績から得たノウハウで、再現性のある売上改善施策を提案します。</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">03</div>
+        <div>
+          <h4>柔軟なプラン設計</h4>
+          <p>スタートアップから中堅企業まで、規模や予算に合わせたプランをご提案します。</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">04</div>
+        <div>
+          <h4>迅速なレスポンス</h4>
+          <p>専任担当制で、ご質問・ご相談には原則24時間以内にご返答します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section id="flow">
+  <div class="container">
+    <div class="section-label">Flow</div>
+    <h2 class="section-title">ご依頼の流れ</h2>
+    <p class="section-desc">お問い合わせから納品まで、スムーズに進められるよう丁寧にサポートします。</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>お問い合わせ・無料相談</h4>
+          <p>フォームまたはメールにてお気軽にご連絡ください。現状の課題やご要望をヒアリングします。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>現状分析・ご提案</h4>
+          <p>ECサイトや競合を分析し、最適な戦略とサービスプランをご提案します。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>契約・プロジェクト開始</h4>
+          <p>内容・費用にご納得いただけたらご契約。担当チームが即座にプロジェクトを開始します。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>制作・施策実行</h4>
+          <p>デザイン制作・コンサル施策を並行して進め、進捗を定期的にご報告します。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>納品・継続サポート</h4>
+          <p>納品後も効果測定・改善提案を継続。長期的なパートナーとして伴走します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section id="company">
+  <div class="container">
+    <div class="section-label">Company</div>
+    <h2 class="section-title">会社概要</h2>
+    <p class="section-desc">GREEN通商は、ECビジネスの成長を支援する専門会社です。</p>
+    <table class="company-table">
+      <tr>
+        <th>会社名</th>
+        <td>株式会社GREEN通商</td>
+      </tr>
+      <tr>
+        <th>設立</th>
+        <td>2020年</td>
+      </tr>
+      <tr>
+        <th>所在地</th>
+        <td>〒000-0000 東京都○○区○○1-2-3</td>
+      </tr>
+      <tr>
+        <th>事業内容</th>
+        <td>ECコンサルティング、ECデザイン制作、広告運用、ECサイト構築</td>
+      </tr>
+      <tr>
+        <th>対応モール</th>
+        <td>楽天市場・Amazon・Yahoo!ショッピング・Shopify 他</td>
+      </tr>
+      <tr>
+        <th>メール</th>
+        <td><a href="mailto:info@green-tsusho.co.jp" style="color:var(--green);">info@green-tsusho.co.jp</a></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact">
+  <div class="container">
+    <h2>まずは無料相談から</h2>
+    <p>ECの売上を伸ばしたい方、デザインを一新したい方、お気軽にご相談ください。</p>
+    <a href="mailto:info@green-tsusho.co.jp" class="btn-white">お問い合わせはこちら →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2024 株式会社GREEN通商. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
