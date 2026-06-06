@@ -3,523 +3,1237 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>株式会社GREEN通商 | ECコンサルティング・デザイン</title>
+  <title>株式会社GREEN通商 | 楽天・EC伴走支援</title>
+  <meta name="description" content="楽天市場のEC伴走支援。24年の現場経験を持つ溝口真由子が、SEO・広告・LINE・商品ページ改善まで一緒に動きます。SOY受賞店舗7社支援実績。まずは無料相談から。">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green:      #2d6a4f;
-      --green-mid:  #40916c;
-      --green-light:#74c69d;
-      --accent:     #52b788;
-      --bg:         #f8faf9;
+      --black:      #1a1a1a;
+      --black-mid:  #2a2a2a;
+      --green:      #1e4d3a;
+      --green-mid:  #2d6a4f;
+      --accent:     #e8a020;
+      --white:      #ffffff;
+      --bg:         #f5f0e8;
+      --bg-warm:    #ede8df;
       --text:       #1a1a1a;
-      --muted:      #5a6e63;
-      --border:     #d8e8df;
+      --muted:      #6b6560;
+      --border:     #ddd8ce;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
-      background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.8;
+      font-size: 16px;
+      background: var(--bg);
     }
 
-    /* NAV */
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 88px 20px; }
+    .section--white { background: #fff; }
+    .section--warm  { background: var(--bg-warm); }
+    .section--black { background: var(--black); color: #fff; }
+    .section--green { background: var(--green); color: #fff; }
+
+    .label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .label--white { color: rgba(255,255,255,.55); }
+
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      color: var(--black);
+    }
+    .section-title--white { color: #fff; }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 52px;
+      line-height: 1.85;
+    }
+    .section-sub--white { color: rgba(255,255,255,.7); }
+
+    /* ======= BUTTONS ======= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+      transition: transform .15s, opacity .15s, box-shadow .15s;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: 0.92; }
+    .btn--accent  { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(232,160,32,.35); }
+    .btn--black   { background: var(--black); color: #fff; }
+    .btn--outline { background: transparent; border: 2px solid #fff; color: #fff; }
+    .btn--outline-dark { background: transparent; border: 2px solid var(--black); color: var(--black); }
+    .btn--sm { padding: 11px 24px; font-size: 0.88rem; }
+
+    /* ======= HEADER ======= */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
+      z-index: 200;
+      background: rgba(245,240,232,0.97);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
     nav {
-      max-width: 1100px;
+      max-width: 1060px;
       margin: 0 auto;
-      padding: 0 24px;
-      height: 64px;
+      padding: 0 20px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .logo {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 0.04em;
-      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: 0.02em;
     }
     .logo span { color: var(--green-mid); }
-    nav ul {
-      list-style: none;
+    .nav-links {
       display: flex;
-      gap: 32px;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
     }
-    nav a {
-      text-decoration: none;
-      font-size: 0.9rem;
+    .nav-links a {
+      font-size: 0.83rem;
       color: var(--muted);
-      letter-spacing: 0.03em;
+      font-weight: 600;
       transition: color .2s;
     }
-    nav a:hover { color: var(--green); }
-
-    /* HERO */
-    .hero {
-      padding: 160px 24px 100px;
-      text-align: center;
-      background: linear-gradient(160deg, #e8f5ee 0%, #f8faf9 60%);
+    .nav-links a:hover { color: var(--black); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 5px;
     }
-    .hero-tag {
-      display: inline-block;
-      background: var(--green-light);
-      color: var(--green);
+
+    /* ======= HERO ======= */
+    .hero {
+      padding: 130px 20px 90px;
+      background: linear-gradient(150deg, #1a1a1a 0%, #2a2a2a 55%, #1e4d3a 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(232,160,32,.12) 0%, transparent 55%);
+    }
+    .hero-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,160,32,.18);
+      border: 1px solid rgba(232,160,32,.4);
+      color: #f5c96a;
       font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 6px 16px;
+      letter-spacing: 0.08em;
+      padding: 7px 18px;
       border-radius: 100px;
-      margin-bottom: 28px;
-      text-transform: uppercase;
+      margin-bottom: 32px;
     }
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.25;
-      color: var(--green);
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #f5c96a;
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2.5vw, 1.08rem);
+      color: rgba(255,255,255,.78);
+      max-width: 540px;
       margin-bottom: 20px;
-      letter-spacing: -0.01em;
+      line-height: 1.85;
     }
-    .hero p {
-      max-width: 580px;
-      margin: 0 auto 40px;
-      font-size: 1.05rem;
-      color: var(--muted);
+    .hero-name {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 40px;
     }
-    .btn {
-      display: inline-block;
-      background: var(--green);
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 36px;
-      border-radius: 6px;
-      font-size: 0.95rem;
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.82rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      transition: background .2s, transform .15s;
     }
-    .btn:hover { background: var(--green-mid); transform: translateY(-2px); }
-
-    /* SECTION COMMON */
-    section { padding: 88px 24px; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
-    .section-title {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800;
-      color: var(--green);
-      margin-bottom: 16px;
-    }
-    .section-desc {
-      color: var(--muted);
-      max-width: 560px;
-      font-size: 0.97rem;
-      margin-bottom: 52px;
+    .hero-note {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,.4);
     }
 
-    /* SERVICES */
-    #services { background: #fff; }
-    .services-grid {
+    /* ======= ABOUT MAYUKO ======= */
+    .mayuko-wrap {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
     }
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 36px 32px;
-      transition: box-shadow .2s, transform .2s;
-    }
-    .card:hover {
-      box-shadow: 0 8px 32px rgba(45,106,79,.12);
-      transform: translateY(-4px);
-    }
-    .card-icon {
-      width: 52px; height: 52px;
-      border-radius: 10px;
-      background: #e8f5ee;
+    .mayuko-img {
+      background: var(--bg-warm);
+      border-radius: 14px;
+      aspect-ratio: 4/3;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-    }
-    .card h3 {
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 10px;
-    }
-    .card p {
-      font-size: 0.9rem;
+      font-size: 5rem;
+      border: 1px solid var(--border);
       color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+      line-height: 1.7;
+    }
+    .mayuko-name {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+    .mayuko-title {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+    .mayuko-body p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+    .mayuko-body strong { color: var(--black); font-weight: 800; }
+    .mayuko-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .mayuko-tag {
+      background: var(--bg-warm);
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--black);
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+
+    /* ======= PROBLEMS ======= */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .problem-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--black);
+      border-radius: 8px;
+      padding: 18px 20px;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .problem-card::before {
+      content: '✔ ';
+      color: var(--black);
+      font-weight: 700;
+    }
+    .problem-resolve {
+      background: var(--black);
+      color: #fff;
+      border-radius: 12px;
+      padding: 36px 32px;
+      text-align: center;
+    }
+    .problem-resolve p {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 22px;
       line-height: 1.75;
     }
 
-    /* STRENGTHS */
-    #strengths { background: var(--bg); }
-    .strengths-list {
+    /* ======= WORK DETAIL ======= */
+    .work-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 40px;
     }
-    .strength-item {
+    .work-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--black);
       display: flex;
-      gap: 16px;
-      align-items: flex-start;
+      align-items: center;
+      gap: 8px;
     }
-    .strength-num {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--green-light);
-      line-height: 1;
-      min-width: 48px;
-    }
-    .strength-item h4 {
-      font-size: 0.97rem;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 6px;
-    }
-    .strength-item p {
-      font-size: 0.87rem;
-      color: var(--muted);
+    .work-item::before {
+      content: '●';
+      color: var(--accent);
+      font-size: 0.6rem;
+      flex-shrink: 0;
     }
 
-    /* FLOW */
-    #flow { background: #fff; }
-    .flow-steps {
+    /* ======= STRENGTHS ======= */
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .strength-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .strength-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,.08);
+      transform: translateY(-3px);
+    }
+    .strength-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .strength-card h3 {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .strength-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ======= RESULTS ======= */
+    .soy-banner {
+      background: var(--black);
+      color: #fff;
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .soy-num {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .soy-text h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .soy-text p {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    .result-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .result-card-head {
+      background: var(--black);
+      color: #fff;
+      padding: 13px 20px;
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+    .result-body {
+      padding: 22px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .result-before, .result-after { flex: 1; text-align: center; }
+    .result-before-label, .result-after-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 5px;
+    }
+    .result-before-label { color: var(--muted); }
+    .result-after-label  { color: var(--green-mid); }
+    .result-before-val { font-size: 1.4rem; font-weight: 800; color: var(--muted); }
+    .result-after-val  { font-size: 1.65rem; font-weight: 900; color: var(--green-mid); }
+    .result-arrow { font-size: 1.4rem; color: var(--accent); font-weight: 900; }
+    .result-desc { padding: 0 20px 18px; font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+
+    /* ======= GREEN会 ======= */
+    .green-kai-wrap {
+      background: var(--black);
+      border-radius: 16px;
+      padding: 56px 48px;
+      color: #fff;
+    }
+    .green-kai-wrap .label { color: var(--accent); }
+    .green-kai-wrap h2 { color: #fff; margin-bottom: 16px; }
+    .green-kai-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+    }
+    .green-kai-text p {
+      font-size: 0.93rem;
+      color: rgba(255,255,255,.75);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .green-kai-text strong { color: #fff; }
+    .green-kai-points { display: flex; flex-direction: column; gap: 16px; }
+    .green-kai-point {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,.85);
+      line-height: 1.7;
+    }
+    .green-kai-point strong { color: #f5c96a; display: block; font-size: 0.92rem; margin-bottom: 4px; }
+
+    /* ======= CTA BAND ======= */
+    .cta-band {
+      background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+      padding: 64px 20px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .cta-band p { color: rgba(255,255,255,.65); font-size: 0.95rem; margin-bottom: 32px; }
+    .cta-options {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .cta-note { font-size: 0.78rem; color: rgba(255,255,255,.4); }
+
+    /* ======= SERVICES ======= */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 26px 22px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .service-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transform: translateY(-3px);
+    }
+    .service-icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .service-card h3 { font-size: 0.97rem; font-weight: 800; color: var(--black); margin-bottom: 7px; }
+    .service-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.75; }
+
+    /* ======= FLOW ======= */
+    .flow-list {
+      max-width: 680px;
+      margin: 0 auto 44px;
       display: flex;
       flex-direction: column;
-      gap: 0;
-      position: relative;
     }
-    .flow-step {
+    .flow-item {
       display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 24px;
-      padding-bottom: 40px;
+      grid-template-columns: 60px 1fr;
+      gap: 18px;
+      padding-bottom: 30px;
       position: relative;
     }
-    .flow-step:last-child { padding-bottom: 0; }
-    .flow-step::before {
+    .flow-item:last-child { padding-bottom: 0; }
+    .flow-item::after {
       content: '';
       position: absolute;
-      left: 38px;
-      top: 52px;
-      bottom: 0;
+      left: 28px; top: 50px; bottom: 0;
       width: 2px;
       background: var(--border);
     }
-    .flow-step:last-child::before { display: none; }
-    .step-num {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: var(--green);
+    .flow-item:last-child::after { display: none; }
+    .flow-num {
+      width: 46px; height: 46px;
+      background: var(--black);
       color: #fff;
-      font-size: 1.1rem;
-      font-weight: 800;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 900;
+      font-size: 0.95rem;
       flex-shrink: 0;
       position: relative;
       z-index: 1;
     }
-    .step-body h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 6px;
-      padding-top: 12px;
-    }
-    .step-body p { font-size: 0.9rem; color: var(--muted); }
+    .flow-body { padding-top: 8px; }
+    .flow-body h4 { font-size: 0.97rem; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+    .flow-body p { font-size: 0.85rem; color: var(--muted); }
 
-    /* COMPANY */
-    #company { background: var(--bg); }
-    .company-table {
-      width: 100%;
-      border-collapse: collapse;
-      max-width: 680px;
+    /* ======= COLUMN ======= */
+    .columns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 36px;
     }
+    .column-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .column-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      transform: translateY(-3px);
+    }
+    .column-thumb {
+      background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+    .column-body { padding: 18px 20px 22px; }
+    .column-cat { font-size: 0.7rem; font-weight: 700; color: var(--green-mid); letter-spacing: 0.08em; margin-bottom: 6px; }
+    .column-body h3 { font-size: 0.93rem; font-weight: 700; color: var(--black); line-height: 1.5; margin-bottom: 7px; }
+    .column-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ======= COMPANY ======= */
+    .company-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .company-table { width: 100%; border-collapse: collapse; }
     .company-table tr { border-bottom: 1px solid var(--border); }
     .company-table th {
       text-align: left;
-      padding: 16px 24px 16px 0;
-      font-size: 0.85rem;
+      padding: 14px 12px 14px 0;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: var(--green);
-      width: 160px;
+      color: var(--black);
+      width: 110px;
       vertical-align: top;
     }
-    .company-table td {
-      padding: 16px 0;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
+    .company-table td { padding: 14px 0; font-size: 0.87rem; color: var(--muted); }
 
-    /* CONTACT CTA */
-    #contact {
-      background: var(--green);
-      text-align: center;
-      padding: 88px 24px;
-    }
-    #contact h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800;
+    .hoken-box {
+      background: var(--black);
       color: #fff;
-      margin-bottom: 14px;
+      border-radius: 14px;
+      padding: 36px 32px;
     }
-    #contact p { color: var(--green-light); margin-bottom: 36px; font-size: 0.97rem; }
-    .btn-white {
-      display: inline-block;
+    .hoken-box h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 18px; line-height: 1.4; }
+    .hoken-box p { font-size: 0.9rem; color: rgba(255,255,255,.75); line-height: 1.9; margin-bottom: 14px; }
+    .hoken-sign { font-size: 0.85rem; color: rgba(255,255,255,.45); margin-top: 22px; }
+
+    /* ======= CONTACT ======= */
+    .contact-wrap {
+      max-width: 640px;
+      margin: 0 auto;
       background: #fff;
-      color: var(--green);
-      text-decoration: none;
-      padding: 14px 40px;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      border-radius: 16px;
+      padding: 48px 40px;
+      box-shadow: 0 4px 40px rgba(0,0,0,.07);
+    }
+    .contact-wrap h2 { font-size: 1.4rem; font-weight: 900; color: var(--black); margin-bottom: 8px; }
+    .contact-wrap > p { font-size: 0.9rem; color: var(--muted); margin-bottom: 32px; line-height: 1.8; }
+    .form-row { margin-bottom: 20px; }
+    .form-row label { display: block; font-size: 0.84rem; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+    .req { background: var(--accent); color: #fff; font-size: 0.63rem; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 0.93rem;
+      color: var(--text);
+      font-family: inherit;
+      background: var(--bg);
+      transition: border-color .2s, background .2s;
+    }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus { outline: none; border-color: var(--black); background: #fff; }
+    .form-row textarea { height: 120px; resize: vertical; }
+    .form-submit {
+      width: 100%;
+      padding: 17px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
       transition: opacity .2s, transform .15s;
+      letter-spacing: 0.03em;
     }
-    .btn-white:hover { opacity: 0.88; transform: translateY(-2px); }
+    .form-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .form-note { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 12px; }
 
-    /* FOOTER */
-    footer {
-      background: #111;
-      color: #888;
+    /* ======= FOOTER ======= */
+    footer { background: #111; color: rgba(255,255,255,.4); padding: 40px 20px 24px; }
+    .footer-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .footer-logo { font-size: 1rem; font-weight: 900; color: #fff; }
+    .footer-links { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,.4); transition: color .2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy {
       text-align: center;
-      padding: 32px 24px;
-      font-size: 0.82rem;
+      font-size: 0.76rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 20px;
+      max-width: 1060px;
+      margin: 0 auto;
     }
-    footer a { color: #aaa; text-decoration: none; }
 
-    /* RESPONSIVE */
-    @media (max-width: 640px) {
-      nav ul { display: none; }
-      .flow-step { grid-template-columns: 60px 1fr; }
-      .flow-step::before { left: 28px; }
+    /* ======= FLOATING CTA ======= */
+    .floating-cta {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      z-index: 300;
     }
+    .floating-cta a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      padding: 13px 22px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 900;
+      box-shadow: 0 4px 20px rgba(232,160,32,.45);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .floating-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,160,32,.55); }
+
+    /* ======= RESPONSIVE ======= */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mayuko-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .company-wrap { grid-template-columns: 1fr; }
+      .green-kai-body { grid-template-columns: 1fr; gap: 28px; }
+      .green-kai-wrap { padding: 36px 24px; }
+      .contact-wrap { padding: 32px 20px; }
+      .section { padding: 64px 16px; }
+    }
+    @media (max-width: 480px) {
+      .result-body { flex-direction: column; gap: 8px; }
+      .soy-banner { padding: 24px 20px; gap: 16px; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .d1 { animation-delay: .1s; }
+    .d2 { animation-delay: .22s; }
+    .d3 { animation-delay: .34s; }
+    .d4 { animation-delay: .46s; }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- HEADER -->
 <header>
   <nav>
-    <a href="#" class="logo">GREEN<span>通商</span></a>
-    <ul>
-      <li><a href="#services">サービス</a></li>
+    <div class="logo">GREEN<span>通商</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">溝口について</a></li>
+      <li><a href="#problems">お悩み</a></li>
       <li><a href="#strengths">強み</a></li>
-      <li><a href="#flow">フロー</a></li>
-      <li><a href="#company">会社概要</a></li>
-      <li><a href="#contact">お問い合わせ</a></li>
+      <li><a href="#green-kai">GREEN会</a></li>
+      <li><a href="#column">コラム</a></li>
+      <li><a href="#contact" class="nav-cta">無料相談</a></li>
     </ul>
   </nav>
 </header>
 
+<!-- FLOATING CTA -->
+<div class="floating-cta">
+  <a href="#contact">💬 まずは相談</a>
+</div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">EC Consulting &amp; Design</div>
-  <h1>売れるECを、<br>デザインで実現する。</h1>
-  <p>株式会社GREEN通商は、ECコンサルティングとデザインの力で、お客様のオンラインビジネスを成長させます。</p>
-  <a href="#contact" class="btn">無料相談はこちら</a>
+  <div class="hero-inner">
+    <div class="hero-badge fade-up">楽天市場 · Amazon · Yahoo! · 自社EC 対応</div>
+    <h1 class="fade-up d1">
+      ECの<em>"次"</em>を、<br>一緒につくりましょう。
+    </h1>
+    <p class="hero-sub fade-up d2">
+      楽天市場を中心に、EC運営の現場に深く入り込み、<br>
+      戦略から実装まで一緒に動くEC伴走支援会社です。
+    </p>
+    <p class="hero-name fade-up d2">代表・溝口真由子（ECデザイン・コンサル歴24年）</p>
+    <div class="hero-tags fade-up d3">
+      <span class="hero-tag">楽天SEO</span>
+      <span class="hero-tag">商品ページ改善</span>
+      <span class="hero-tag">RPP/TDA広告</span>
+      <span class="hero-tag">LINE施策</span>
+      <span class="hero-tag">CRM</span>
+      <span class="hero-tag">伴走型支援</span>
+      <span class="hero-tag">SOY受賞店舗7社</span>
+    </div>
+    <div class="hero-btns fade-up d4">
+      <a href="#contact" class="btn btn--accent">まずは無料相談 →</a>
+      <a href="#results" class="btn btn--outline">実績を見る</a>
+    </div>
+    <p class="hero-note fade-up d4">壁打ち歓迎 · 現状相談OK · 完全無料</p>
+  </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
+<!-- ABOUT MAYUKO -->
+<section id="about" class="section section--white">
   <div class="container">
-    <div class="section-label">Services</div>
-    <h2 class="section-title">事業内容・サービス</h2>
-    <p class="section-desc">ECサイトの立ち上げから運用改善、ブランドデザインまで、ワンストップでサポートします。</p>
-    <div class="services-grid">
-      <div class="card">
-        <div class="card-icon">🛒</div>
-        <h3>ECコンサルティング</h3>
-        <p>楽天市場・Amazon・Yahoo!ショッピングなど主要モールへの出店支援、売上改善戦略の立案・実行まで総合的にサポートします。</p>
+    <div class="label">About</div>
+    <h2 class="section-title">あなたの会社の、<br>もう一人のメンバーでいたい。</h2>
+    <div class="mayuko-wrap">
+      <div class="mayuko-img">
+        ここに溝口真由子さんの<br>写真が入ります
       </div>
-      <div class="card">
-        <div class="card-icon">🎨</div>
-        <h3>ECデザイン制作</h3>
-        <p>商品ページ・バナー・ストアデザインを、コンバージョン率を意識したクオリティで制作。ブランドの世界観を大切にします。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h3>データ分析・改善提案</h3>
-        <p>アクセス解析・売上データをもとに課題を特定し、具体的な改善施策を提案・実行します。PDCAサイクルで成果を出し続けます。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">📸</div>
-        <h3>商品撮影・画像加工</h3>
-        <p>高品質な商品写真の撮影から、EC向けの画像加工・レタッチまで対応。魅力的なビジュアルで購買意欲を高めます。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">📣</div>
-        <h3>広告・プロモーション</h3>
-        <p>RPP広告・スポンサープロダクト広告の運用代行、SNSを活用したプロモーション施策で集客を強化します。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🌐</div>
-        <h3>自社ECサイト構築</h3>
-        <p>Shopify・BASE・STORESを活用した自社ECサイトの構築・デザインカスタマイズ。独自ブランドの確立を支援します。</p>
+      <div class="mayuko-body">
+        <div class="mayuko-name">溝口 真由子</div>
+        <div class="mayuko-title">株式会社GREEN通商 代表 ／ ECコンサルティング・デザイン歴24年</div>
+        <p>
+          クライアントの会社の<strong>一メンバーのような感覚</strong>で、
+          ずっと仕事をしてきました。
+          「こうした方がいいですよ」で終わるのではなく、
+          実際に考えて、動いて、一緒に改善する。それが自分のスタイルです。
+        </p>
+        <p>
+          楽しく働くことが大事だと思っています。
+          クライアントも、自分たちも。
+          仕事がうまくいっているときって、たいてい<strong>現場が楽しくなっているとき</strong>です。
+          だから数字だけじゃなく、現場の空気や人の気持ちも大切にしています。
+        </p>
+        <p>
+          デザイン会社出身なので、クリエイティブを軸にしたコンサルが特徴です。
+          毎日、楽天の商品ページ改善・LINE配信・広告改善・売上分析を
+          <strong>実務レベルで</strong>クライアントと一緒に動いています。
+          長年そうやってきて、今があります。
+        </p>
+        <div class="mayuko-tags">
+          <span class="mayuko-tag">現場主義</span>
+          <span class="mayuko-tag">伴走型</span>
+          <span class="mayuko-tag">デザイン×コンサル</span>
+          <span class="mayuko-tag">試して磨く</span>
+          <span class="mayuko-tag">親しみやすさ</span>
+          <span class="mayuko-tag">ファン化重視</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STRENGTHS -->
-<section id="strengths">
+<!-- PROBLEMS -->
+<section id="problems" class="section">
   <div class="container">
-    <div class="section-label">Why GREEN通商</div>
-    <h2 class="section-title">選ばれる理由</h2>
-    <p class="section-desc">コンサルティングとデザインを一体で提供するからこそ、戦略と実装が一貫しています。</p>
-    <div class="strengths-list">
-      <div class="strength-item">
+    <div class="label">こんなお悩みありませんか？</div>
+    <h2 class="section-title">EC、一人で抱えていませんか？</h2>
+    <p class="section-sub">多くの店舗が同じところで詰まっています。一人で悩まず、まず話してみてください。</p>
+    <div class="problems-grid">
+      <div class="problem-card">楽天の自然検索順位が上がらない</div>
+      <div class="problem-card">広告費をかけても売上につながらない</div>
+      <div class="problem-card">商品ページ、何から手をつければいいかわからない</div>
+      <div class="problem-card">LINEでリピーターが全然増えない</div>
+      <div class="problem-card">EC担当が少なく、施策が全然進まない</div>
+      <div class="problem-card">競合に差をつけられている感覚がある</div>
+      <div class="problem-card">代理店に任せているが成果が見えない</div>
+      <div class="problem-card">何が課題かすらわからない状態</div>
+      <div class="problem-card">値引きだけの戦いに疲れてきた</div>
+      <div class="problem-card">ファン・リピーターを増やしたいが方法がわからない</div>
+    </div>
+    <div class="problem-resolve">
+      <p>その悩み、GREEN通商に話してみてください。<br>現状を整理するだけでも、きっと前が見えます。</p>
+      <a href="#contact" class="btn btn--accent">現状を相談する（無料）</a>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section id="strengths" class="section">
+  <div class="container">
+    <div class="label">Why GREEN通商</div>
+    <h2 class="section-title">小さいから、できること。<br>信頼があるから、深く入れる。</h2>
+    <p class="section-sub">大人数の会社ではありません。3名だからこそ、担当者が直接動き、信頼関係を大切にした伴走ができます。</p>
+    <div class="strengths-grid">
+      <div class="strength-card">
         <div class="strength-num">01</div>
-        <div>
-          <h4>コンサル×デザインの一貫体制</h4>
-          <p>戦略立案からビジュアル制作まで社内完結。スピードとクオリティを両立します。</p>
-        </div>
+        <h3>小さいから、深く関われる。</h3>
+        <p>窓口と実務が同じ人間。話した内容がすぐ動きに変わります。大きな会社にありがちな「言ったけど動かない」がありません。</p>
       </div>
-      <div class="strength-item">
+      <div class="strength-card">
         <div class="strength-num">02</div>
-        <div>
-          <h4>実績に基づく改善提案</h4>
-          <p>多数のEC運営実績から得たノウハウで、再現性のある売上改善施策を提案します。</p>
-        </div>
+        <h3>信頼関係が、一番の武器。</h3>
+        <p>数字だけの関係ではなく、担当者の事情・会社の背景まで理解した上で動きます。長く付き合えるパートナーを目指しています。</p>
       </div>
-      <div class="strength-item">
+      <div class="strength-card">
         <div class="strength-num">03</div>
-        <div>
-          <h4>柔軟なプラン設計</h4>
-          <p>スタートアップから中堅企業まで、規模や予算に合わせたプランをご提案します。</p>
+        <h3>「100試して10当てる」精神。</h3>
+        <p>完璧を待たない。仮説→実行→改善を繰り返す。理論ではなく「実際に売れたか」が全ての判断基準です。</p>
+      </div>
+      <div class="strength-card">
+        <div class="strength-num">04</div>
+        <h3>戦略から実装まで、自分たちで動く。</h3>
+        <p>課題分析・施策立案・実行・効果測定を同じ人間が担当。「提案だけ」「制作だけ」になりません。</p>
+      </div>
+      <div class="strength-card">
+        <div class="strength-num">05</div>
+        <h3>売上だけじゃなく、ファン化を重視。</h3>
+        <p>値引きだけの戦いは長続きしない。リピート・ファン化・選ばれる理由づくりを、売上改善と同時に進めます。</p>
+      </div>
+      <div class="strength-card">
+        <div class="strength-num">06</div>
+        <h3>「何でも聞いて」が本音。</h3>
+        <p>「こんなこと聞いていいのか」という相談こそ歓迎。上から目線は嫌い。一緒に考えることを大切にしています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK DETAIL -->
+<section class="section section--white">
+  <div class="container">
+    <div class="label">Daily Work</div>
+    <h2 class="section-title">机上の空論ではない。<br>毎日、現場で動いています。</h2>
+    <p class="section-sub">コンサルタントではなく、実務家。溝口が日々クライアントと一緒に取り組んでいる業務の一部です。</p>
+    <div class="work-grid">
+      <div class="work-item">楽天 商品ページ改善</div>
+      <div class="work-item">商品名・SEO改善</div>
+      <div class="work-item">特設会場企画</div>
+      <div class="work-item">スーパーSALE施策</div>
+      <div class="work-item">LINE配信設計</div>
+      <div class="work-item">CRM改善</div>
+      <div class="work-item">RPP広告改善</div>
+      <div class="work-item">TDA広告改善</div>
+      <div class="work-item">SNS企画</div>
+      <div class="work-item">PR TIMES企画</div>
+      <div class="work-item">季節イベント企画</div>
+      <div class="work-item">売上分析</div>
+      <div class="work-item">転換率分析</div>
+      <div class="work-item">商品訴求改善</div>
+      <div class="work-item">販促企画</div>
+      <div class="work-item">店長代行サポート</div>
+    </div>
+    <p style="font-size:0.88rem; color:var(--muted); line-height:1.85;">
+      「どうやって売れるか」を毎日考え、実際に手を動かしています。<br>
+      ジャンルが違っても<strong style="color:var(--black);">「売れる型」を応用できる</strong>のが、24年の現場経験から生まれた強みです。
+    </p>
+    <div style="margin-top:32px;">
+      <a href="#contact" class="btn btn--black">一緒に動いてほしい →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND 1 -->
+<div class="cta-band">
+  <h2>まず話すだけでも、前が見えてきます。</h2>
+  <p>課題整理だけでもOK。壁打ち歓迎。費用の話は後回しでいいです。</p>
+  <div class="cta-options">
+    <a href="#contact" class="btn btn--accent">無料で相談する →</a>
+  </div>
+  <p class="cta-note">営業・押し売りは一切しません</p>
+</div>
+
+<!-- GREEN会 -->
+<section id="green-kai" class="section">
+  <div class="container">
+    <div class="green-kai-wrap">
+      <div class="label">GREEN会</div>
+      <h2 class="section-title section-title--white" style="margin-top:4px;">みんなで試して、<br>みんなで強くなる。</h2>
+      <div class="green-kai-body">
+        <div class="green-kai-text">
+          <p>
+            GREEN会は、GREEN通商のクライアント同士が集まり、
+            <strong>成功も失敗も本音で共有する</strong>勉強会です。
+          </p>
+          <p>
+            上から教えるセミナーではありません。
+            「やってみたけどダメだった施策」も、「こうしたらうまくいった」も、
+            フラットに共有します。
+          </p>
+          <p>
+            できない理由を探すより、
+            <strong>「どうやったらできるか？」を考える場</strong>にしたい。
+            それがGREEN会の精神です。
+          </p>
+          <p style="font-size:0.82rem; color:rgba(255,255,255,.45); margin-top:20px;">
+            ※一定以上の伴走契約企業のみ参加可能。参加には既存会員の合意が必要な、信頼を重視した特別なコミュニティです。
+          </p>
+        </div>
+        <div class="green-kai-points">
+          <div class="green-kai-point">
+            <strong>本音のEC情報共有</strong>
+            成功事例だけでなく、失敗した施策もオープンに共有。リアルな現場の知恵が集まります。
+          </div>
+          <div class="green-kai-point">
+            <strong>横のつながりができる</strong>
+            ジャンルを越えた店舗同士が繋がり、お互いに刺激し合える環境です。
+          </div>
+          <div class="green-kai-point">
+            <strong>「できない理由」より「どうすればできるか」</strong>
+            現場主義のカルチャーを大切にした場です。
+          </div>
         </div>
       </div>
-      <div class="strength-item">
-        <div class="strength-num">04</div>
-        <div>
-          <h4>迅速なレスポンス</h4>
-          <p>専任担当制で、ご質問・ご相談には原則24時間以内にご返答します。</p>
-        </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND 2 -->
+<div class="cta-band">
+  <h2>「ちょっと聞いてみたい」<br>それで十分です。</h2>
+  <p>相談のハードルを下げることを、一番大切にしています。</p>
+  <div class="cta-options">
+    <a href="#contact" class="btn btn--accent">無料で相談する →</a>
+  </div>
+  <p class="cta-note">壁打ち歓迎 · 現状相談OK · 営業しません</p>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section section--white">
+  <div class="container">
+    <div class="label">Services</div>
+    <h2 class="section-title">サービス一覧</h2>
+    <p class="section-sub">単体でも、複数組み合わせでも対応可能です。「何から始めればいいかわからない」という相談も歓迎です。</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>楽天SEO対策</h3>
+        <p>キーワード選定・商品名改善・説明文最適化。自然検索流入を増やし、広告依存を下げます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📣</div>
+        <h3>RPP / TDA広告改善</h3>
+        <p>広告構造の見直しから入札戦略まで。「費用はかけているのに成果が出ない」を改善します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💬</div>
+        <h3>LINE施策・CRM</h3>
+        <p>リピーター育成のためのLINEシナリオ設計・顧客セグメント別アプローチ。ファン化を促進します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>商品ページ・バナー制作</h3>
+        <p>デザイン会社出身ならではのクリエイティブ力。転換率を意識した「売れるページ」を作ります。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>EC戦略・販促企画</h3>
+        <p>スーパーSALE施策・季節イベント企画・特設会場企画など、売上の波を作る仕掛けを一緒に考えます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3>SNS・PR企画</h3>
+        <p>SNS運用方針の設計・PR TIMES活用など、EC外からの流入づくりを支援します。</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FLOW -->
-<section id="flow">
+<section class="section">
   <div class="container">
-    <div class="section-label">Flow</div>
-    <h2 class="section-title">ご依頼の流れ</h2>
-    <p class="section-desc">お問い合わせから納品まで、スムーズに進められるよう丁寧にサポートします。</p>
-    <div class="flow-steps">
-      <div class="flow-step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>お問い合わせ・無料相談</h4>
-          <p>フォームまたはメールにてお気軽にご連絡ください。現状の課題やご要望をヒアリングします。</p>
+    <div class="label">Flow</div>
+    <h2 class="section-title" style="text-align:center;">相談から始まる流れ</h2>
+    <p class="section-sub" style="margin:0 auto 52px; text-align:center;">難しい手続きはありません。まず話すだけで大丈夫です。</p>
+    <div class="flow-list">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <h4>無料相談（オンライン or 電話）</h4>
+          <p>現状・課題・目標を自由に話してください。この段階で費用の話は不要です。壁打ちでもOK。</p>
         </div>
       </div>
-      <div class="flow-step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>現状分析・ご提案</h4>
-          <p>ECサイトや競合を分析し、最適な戦略とサービスプランをご提案します。</p>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <h4>現状分析・改善ポイントの整理</h4>
+          <p>ECデータや店舗状況をもとに課題を整理し、優先して取り組む施策をご提案します。</p>
         </div>
       </div>
-      <div class="flow-step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>契約・プロジェクト開始</h4>
-          <p>内容・費用にご納得いただけたらご契約。担当チームが即座にプロジェクトを開始します。</p>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <h4>プランのご提案・お見積り</h4>
+          <p>ご予算・規模・体制に合わせたプランをご提案。納得いただけたらスタートです。</p>
         </div>
       </div>
-      <div class="flow-step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4>制作・施策実行</h4>
-          <p>デザイン制作・コンサル施策を並行して進め、進捗を定期的にご報告します。</p>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div class="flow-body">
+          <h4>施策実行・月次レビュー</h4>
+          <p>毎月の数字を一緒に確認しながら、次の一手を考えます。報告だけでは終わりません。</p>
         </div>
       </div>
-      <div class="flow-step">
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <h4>納品・継続サポート</h4>
-          <p>納品後も効果測定・改善提案を継続。長期的なパートナーとして伴走します。</p>
+      <div class="flow-item">
+        <div class="flow-num">5</div>
+        <div class="flow-body">
+          <h4>継続改善・長期伴走</h4>
+          <p>EC成長に終わりはありません。試して、磨いて、強くなる。長期的なパートナーとして伴走します。</p>
         </div>
       </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#contact" class="btn btn--accent">まず相談してみる →</a>
+      <p style="margin-top:12px; font-size:0.78rem; color:var(--muted);">壁打ち歓迎・現状相談OK・費用の話は後でOK</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLUMN -->
+<section id="column" class="section section--white">
+  <div class="container">
+    <div class="label">Column</div>
+    <h2 class="section-title">ECノウハウコラム</h2>
+    <p class="section-sub">現場で使えるEC運営のノウハウを発信しています。「試して磨いた」実務から生まれた情報です。</p>
+    <div class="columns-grid">
+      <div class="column-card">
+        <div class="column-thumb">🔍</div>
+        <div class="column-body">
+          <div class="column-cat">楽天SEO</div>
+          <h3>楽天SEOで最初にやるべき5つのこと【2024年版】</h3>
+          <p>検索順位を上げるために、まず手をつけるべき施策を現場目線で解説。</p>
+        </div>
+      </div>
+      <div class="column-card">
+        <div class="column-thumb">💬</div>
+        <div class="column-body">
+          <div class="column-cat">LINE施策</div>
+          <h3>リピーターを増やすLINEシナリオの作り方</h3>
+          <p>一度買ってもらったお客様に再購入してもらうためのLINE活用法。</p>
+        </div>
+      </div>
+      <div class="column-card">
+        <div class="column-thumb">🎨</div>
+        <div class="column-body">
+          <div class="column-cat">商品ページ改善</div>
+          <h3>転換率が上がる商品ページの「伝え方」</h3>
+          <p>デザインより先に考えるべき「訴求軸」の設計について解説します。</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#" class="btn btn--outline-dark btn--sm">コラムをもっと見る</a>
     </div>
   </div>
 </section>
 
 <!-- COMPANY -->
-<section id="company">
+<section id="company" class="section">
   <div class="container">
-    <div class="section-label">Company</div>
+    <div class="label">Company</div>
     <h2 class="section-title">会社概要</h2>
-    <p class="section-desc">GREEN通商は、ECビジネスの成長を支援する専門会社です。</p>
-    <table class="company-table">
-      <tr>
-        <th>会社名</th>
-        <td>株式会社GREEN通商</td>
-      </tr>
-      <tr>
-        <th>設立</th>
-        <td>2020年</td>
-      </tr>
-      <tr>
-        <th>所在地</th>
-        <td>〒000-0000 東京都○○区○○1-2-3</td>
-      </tr>
-      <tr>
-        <th>事業内容</th>
-        <td>ECコンサルティング、ECデザイン制作、広告運用、ECサイト構築</td>
-      </tr>
-      <tr>
-        <th>対応モール</th>
-        <td>楽天市場・Amazon・Yahoo!ショッピング・Shopify 他</td>
-      </tr>
-      <tr>
-        <th>メール</th>
-        <td><a href="mailto:info@green-tsusho.co.jp" style="color:var(--green);">info@green-tsusho.co.jp</a></td>
-      </tr>
-    </table>
+    <div class="company-wrap">
+      <table class="company-table">
+        <tr><th>会社名</th><td>株式会社GREEN通商</td></tr>
+        <tr><th>代表</th><td>溝口 真由子</td></tr>
+        <tr><th>設立</th><td>―</td></tr>
+        <tr><th>社員数</th><td>3名</td></tr>
+        <tr><th>所在地</th><td>〒262-0016<br>千葉県千葉市花見川区千種町230-12</td></tr>
+        <tr><th>事業内容</th><td>EC伴走支援・楽天市場運営支援・SEO改善・商品ページ制作・LINE施策・CRM・広告改善・販促企画</td></tr>
+        <tr><th>対応モール</th><td>楽天市場・Amazon・Yahoo!ショッピング・自社EC 他</td></tr>
+        <tr><th>メール</th><td><a href="mailto:info@green-tsusho.co.jp" style="color:var(--black);font-weight:700;">info@green-tsusho.co.jp</a></td></tr>
+      </table>
+      <div class="hoken-box">
+        <h3>あなたの会社の、<br>もう一人のメンバーでいたい。</h3>
+        <p>
+          クライアントの会社の一メンバーのような感覚で、
+          長年ずっとそうやって仕事をしてきました。
+          その積み重ねが、今のGREEN通商です。
+        </p>
+        <p>
+          楽しく働くことが大事だと思っています。
+          仕事がうまくいっているとき、現場はたいてい楽しくなっています。
+          だから数字だけでなく、現場の空気も大切にしています。
+        </p>
+        <p>
+          「試して、磨いて、強くなる。」<br>
+          一緒に、ECの"次"をつくりましょう。
+        </p>
+        <div class="hoken-sign">株式会社GREEN通商 代表 溝口 真由子</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT CTA -->
-<section id="contact">
+<!-- CONTACT -->
+<section id="contact" class="section section--white">
   <div class="container">
-    <h2>まずは無料相談から</h2>
-    <p>ECの売上を伸ばしたい方、デザインを一新したい方、お気軽にご相談ください。</p>
-    <a href="mailto:info@green-tsusho.co.jp" class="btn-white">お問い合わせはこちら →</a>
+    <div class="contact-wrap">
+      <h2>まずは無料相談</h2>
+      <p>
+        どんな些細なことでも構いません。<br>
+        「これって相談していいのかな」という内容こそ、大歓迎です。<br>
+        現状を話してくれるだけで、一緒に整理します。
+      </p>
+      <form>
+        <div class="form-row">
+          <label>会社名 / 店舗名<span class="req">必須</span></label>
+          <input type="text" placeholder="株式会社〇〇 / 楽天〇〇店">
+        </div>
+        <div class="form-row">
+          <label>お名前<span class="req">必須</span></label>
+          <input type="text" placeholder="山田 太郎">
+        </div>
+        <div class="form-row">
+          <label>メールアドレス<span class="req">必須</span></label>
+          <input type="email" placeholder="info@example.com">
+        </div>
+        <div class="form-row">
+          <label>ご相談内容</label>
+          <select>
+            <option value="">選択してください</option>
+            <option>楽天SEO改善</option>
+            <option>商品ページ・バナー改善</option>
+            <option>RPP / TDA広告改善</option>
+            <option>LINE施策・CRM</option>
+            <option>EC全体の売上改善</option>
+            <option>販促・イベント企画</option>
+            <option>SNS・PR</option>
+            <option>まずは話したい・壁打ちしたい</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>現状・お気持ちなど（任意）</label>
+          <textarea placeholder="現状の課題、気になっていること、何でもお書きください。「うまくいかない気がする」でも大丈夫です。"></textarea>
+        </div>
+        <button type="submit" class="form-submit">無料相談を申し込む →</button>
+        <p class="form-note">営業・押し売りは一切しません。お気軽にどうぞ。</p>
+      </form>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2024 株式会社GREEN通商. All Rights Reserved.</p>
+  <div class="footer-inner">
+    <div class="footer-logo">GREEN通商</div>
+    <ul class="footer-links">
+      <li><a href="#about">溝口について</a></li>
+      <li><a href="#problems">お悩み</a></li>
+      <li><a href="#strengths">強み</a></li>
+      <li><a href="#green-kai">GREEN会</a></li>
+      <li><a href="#services">サービス</a></li>
+      <li><a href="#column">コラム</a></li>
+      <li><a href="#company">会社概要</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">
+    &copy; 2024 株式会社GREEN通商. All Rights Reserved.
+  </div>
 </footer>
 
 </body>
