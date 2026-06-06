@@ -4,1181 +4,1706 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>株式会社GREEN通商 | 楽天・EC伴走支援</title>
-  <meta name="description" content="楽天市場のEC伴走支援。24年の現場経験を持つ溝口真由子が、SEO・広告・LINE・商品ページ改善まで一緒に動きます。SOY受賞店舗7社支援実績。まずは無料相談から。">
+  <meta name="description" content="楽天市場のEC伴走支援。24年の現場経験を持つ溝口真由子が、SEO・広告・LINE・商品ページ改善まで一緒に動きます。まずは無料相談から。">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:      #1a1a1a;
-      --black-mid:  #2a2a2a;
-      --green:      #1e4d3a;
-      --green-mid:  #2d6a4f;
-      --accent:     #e8a020;
-      --white:      #ffffff;
-      --bg:         #f5f0e8;
-      --bg-warm:    #ede8df;
-      --text:       #1a1a1a;
-      --muted:      #6b6560;
-      --border:     #ddd8ce;
+      --black:   #0f0f0f;
+      --off-black: #1a1a1a;
+      --white:   #ffffff;
+      --beige:   #f4efe6;
+      --beige-d: #ebe4d8;
+      --amber:   #d4920a;
+      --amber-lt:#f5c842;
+      --green:   #1e4d3a;
+      --muted:   #6b6358;
+      --border:  #d8d0c4;
+      --serif: 'DM Serif Display', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+      --sans: 'Inter', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
-      color: var(--text);
-      line-height: 1.8;
-      font-size: 16px;
-      background: var(--bg);
+      font-family: var(--sans);
+      background: var(--beige);
+      color: var(--off-black);
+      line-height: 1.7;
+      overflow-x: hidden;
     }
 
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--amber-lt); color: var(--black); }
 
-    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
-    .section { padding: 88px 20px; }
-    .section--white { background: #fff; }
-    .section--warm  { background: var(--bg-warm); }
-    .section--black { background: var(--black); color: #fff; }
-    .section--green { background: var(--green); color: #fff; }
-
-    .label {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
     }
-    .label--white { color: rgba(255,255,255,.55); }
-
-    .section-title {
-      font-size: clamp(1.5rem, 4vw, 2.1rem);
-      font-weight: 900;
-      line-height: 1.3;
-      margin-bottom: 14px;
-      color: var(--black);
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
     }
-    .section-title--white { color: #fff; }
-    .section-sub {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 580px;
-      margin-bottom: 52px;
-      line-height: 1.85;
-    }
-    .section-sub--white { color: rgba(255,255,255,.7); }
+    .reveal-left.visible { opacity: 1; transform: none; }
 
-    /* ======= BUTTONS ======= */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 15px 32px;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      border: none;
-      transition: transform .15s, opacity .15s, box-shadow .15s;
-      text-decoration: none;
-    }
-    .btn:hover { transform: translateY(-2px); opacity: 0.92; }
-    .btn--accent  { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(232,160,32,.35); }
-    .btn--black   { background: var(--black); color: #fff; }
-    .btn--outline { background: transparent; border: 2px solid #fff; color: #fff; }
-    .btn--outline-dark { background: transparent; border: 2px solid var(--black); color: var(--black); }
-    .btn--sm { padding: 11px 24px; font-size: 0.88rem; }
-
-    /* ======= HEADER ======= */
+    /* ── HEADER ── */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
-      background: rgba(245,240,232,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-    nav {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 20px;
-      height: 60px;
+      z-index: 100;
+      padding: 0 40px;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      mix-blend-mode: normal;
     }
-    .logo {
-      font-size: 1.05rem;
-      font-weight: 900;
-      color: var(--black);
-      letter-spacing: 0.02em;
-    }
-    .logo span { color: var(--green-mid); }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.83rem;
-      color: var(--muted);
-      font-weight: 600;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--black); }
-    .nav-cta {
-      background: var(--accent) !important;
-      color: #fff !important;
-      padding: 8px 20px;
-      border-radius: 5px;
-    }
-
-    /* ======= HERO ======= */
-    .hero {
-      padding: 130px 20px 90px;
-      background: linear-gradient(150deg, #1a1a1a 0%, #2a2a2a 55%, #1e4d3a 100%);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
+    header::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 70% 30%, rgba(232,160,32,.12) 0%, transparent 55%);
+      background: rgba(244,239,230,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: -1;
+    }
+    .logo {
+      font-family: var(--sans);
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+    .logo em { font-style: normal; color: var(--green); }
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--black); }
+    .nav-cta {
+      background: var(--black);
+      color: var(--beige) !important;
+      padding: 9px 22px;
+      border-radius: 2px;
+      font-size: .78rem !important;
+      letter-spacing: .08em;
+    }
+    .nav-cta:hover { background: var(--off-black); opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      background: var(--black);
+      color: var(--beige);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-text {
+      position: absolute;
+      bottom: -4vw;
+      left: -2vw;
+      font-family: var(--serif);
+      font-size: clamp(120px, 20vw, 240px);
+      font-weight: 400;
+      color: rgba(255,255,255,.03);
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
     }
     .hero-inner {
-      max-width: 1060px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      align-items: end;
+      padding: 140px 40px 60px;
+      gap: 60px;
       position: relative;
     }
-    .hero-badge {
-      display: inline-flex;
+    .hero-left {}
+    .hero-eyebrow {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(232,160,32,.18);
-      border: 1px solid rgba(232,160,32,.4);
-      color: #f5c96a;
-      font-size: 0.78rem;
+      gap: 12px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .8s .2s ease both;
+    }
+    .hero-eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--amber);
+    }
+    .hero-eyebrow span {
+      font-size: .72rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 7px 18px;
-      border-radius: 100px;
-      margin-bottom: 32px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--amber);
     }
     .hero h1 {
-      font-size: clamp(2rem, 6vw, 3.6rem);
-      font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp .9s .35s ease both;
     }
     .hero h1 em {
-      font-style: normal;
-      color: #f5c96a;
+      font-style: italic;
+      color: var(--amber-lt);
     }
     .hero-sub {
-      font-size: clamp(0.95rem, 2.5vw, 1.08rem);
-      color: rgba(255,255,255,.78);
-      max-width: 540px;
-      margin-bottom: 20px;
-      line-height: 1.85;
-    }
-    .hero-name {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,.5);
-      margin-bottom: 40px;
-    }
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 44px;
-    }
-    .hero-tag {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      color: rgba(255,255,255,.85);
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: clamp(.9rem, 1.5vw, 1.05rem);
+      color: rgba(244,239,230,.65);
+      max-width: 480px;
+      line-height: 1.9;
+      margin-bottom: 48px;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp .9s .5s ease both;
     }
     .hero-btns {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .9s .65s ease both;
     }
-    .hero-note {
-      margin-top: 16px;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,.4);
-    }
-
-    /* ======= ABOUT MAYUKO ======= */
-    .mayuko-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
+    .btn-primary {
+      display: inline-flex;
       align-items: center;
-    }
-    .mayuko-img {
-      background: var(--bg-warm);
-      border-radius: 14px;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: center;
-      padding: 20px;
-      line-height: 1.7;
-    }
-    .mayuko-name {
-      font-size: 1.5rem;
-      font-weight: 900;
+      gap: 10px;
+      background: var(--amber);
       color: var(--black);
+      font-size: .85rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      padding: 15px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--amber-lt); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid rgba(244,239,230,.25);
+      color: rgba(244,239,230,.75);
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: 15px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: rgba(244,239,230,.6); color: var(--beige); }
+    .hero-note {
+      margin-top: 20px;
+      font-size: .72rem;
+      color: rgba(244,239,230,.3);
+      letter-spacing: .06em;
+      opacity: 0;
+      animation: fadeUp .9s .8s ease both;
+    }
+    .hero-right {
+      border-left: 1px solid rgba(255,255,255,.1);
+      padding-left: 40px;
+      align-self: end;
+      padding-bottom: 4px;
+      opacity: 0;
+      animation: fadeUp .9s .5s ease both;
+    }
+    .hero-profile-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--beige);
       margin-bottom: 4px;
     }
-    .mayuko-title {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 28px;
-      font-weight: 600;
+    .hero-profile-role {
+      font-size: .72rem;
+      color: rgba(244,239,230,.4);
+      letter-spacing: .08em;
+      margin-bottom: 24px;
+      line-height: 1.7;
     }
-    .mayuko-body p {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.9;
-      margin-bottom: 18px;
-    }
-    .mayuko-body strong { color: var(--black); font-weight: 800; }
-    .mayuko-tags {
+    .hero-tags {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 24px;
+      flex-direction: column;
+      gap: 6px;
     }
-    .mayuko-tag {
-      background: var(--bg-warm);
-      border: 1px solid var(--border);
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--black);
-      padding: 5px 14px;
-      border-radius: 100px;
-    }
-
-    /* ======= PROBLEMS ======= */
-    .problems-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-bottom: 40px;
-    }
-    .problem-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--black);
-      border-radius: 8px;
-      padding: 18px 20px;
-      font-size: 0.9rem;
-      color: var(--text);
-      line-height: 1.65;
-    }
-    .problem-card::before {
-      content: '✔ ';
-      color: var(--black);
-      font-weight: 700;
-    }
-    .problem-resolve {
-      background: var(--black);
-      color: #fff;
-      border-radius: 12px;
-      padding: 36px 32px;
-      text-align: center;
-    }
-    .problem-resolve p {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 22px;
-      line-height: 1.75;
-    }
-
-    /* ======= WORK DETAIL ======= */
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-    .work-item {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--black);
+    .hero-tag {
+      font-size: .72rem;
+      color: rgba(244,239,230,.5);
+      letter-spacing: .04em;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .work-item::before {
-      content: '●';
-      color: var(--accent);
-      font-size: 0.6rem;
+    .hero-tag::before {
+      content: '';
+      width: 16px; height: 1px;
+      background: var(--amber);
       flex-shrink: 0;
     }
+    .hero-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      opacity: 0;
+      animation: fadeUp .9s .9s ease both;
+    }
+    .hero-bottom-left {
+      font-size: .72rem;
+      color: rgba(244,239,230,.3);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .scroll-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .7rem;
+      color: rgba(244,239,230,.3);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: rgba(244,239,230,.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--amber);
+      animation: scrollAnim 2s ease infinite;
+    }
+    @keyframes scrollAnim {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
 
-    /* ======= STRENGTHS ======= */
-    .strengths-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--amber);
+      overflow: hidden;
+      padding: 14px 0;
+      white-space: nowrap;
     }
-    .strength-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px 28px;
-      transition: box-shadow .2s, transform .2s;
+    .marquee-track {
+      display: inline-flex;
+      gap: 0;
+      animation: marquee 28s linear infinite;
     }
-    .strength-card:hover {
-      box-shadow: 0 8px 28px rgba(0,0,0,.08);
-      transform: translateY(-3px);
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
-    .strength-num {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .strength-card h3 {
-      font-size: 1.05rem;
-      font-weight: 900;
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 28px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
       color: var(--black);
-      margin-bottom: 10px;
-      line-height: 1.4;
     }
-    .strength-card p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.8;
+    .marquee-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--black);
+      opacity: .4;
     }
 
-    /* ======= RESULTS ======= */
-    .soy-banner {
-      background: var(--black);
-      color: #fff;
-      border-radius: 14px;
-      padding: 32px 36px;
-      margin-bottom: 40px;
+    /* ── ABOUT ── */
+    .about {
+      background: var(--white);
+      padding: 120px 40px;
+    }
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 80px;
+    }
+    .about-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 8px;
+      writing-mode: horizontal-tb;
+    }
+    .about-content {}
+    .about-headline {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 48px;
+      letter-spacing: -.01em;
+    }
+    .about-headline em { font-style: italic; color: var(--green); }
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .about-body p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.95;
+    }
+    .about-body p strong { color: var(--off-black); font-weight: 700; }
+    .about-profile {
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
       display: flex;
       align-items: center;
       gap: 28px;
-      flex-wrap: wrap;
     }
-    .soy-num {
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: var(--accent);
-      line-height: 1;
+    .about-profile-initial {
+      width: 64px; height: 64px;
+      background: var(--black);
+      color: var(--beige);
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
       flex-shrink: 0;
     }
-    .soy-text h3 {
+    .about-profile-name {
       font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .soy-text p {
-      font-size: 0.86rem;
-      color: rgba(255,255,255,.65);
-      line-height: 1.7;
-    }
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 18px;
-    }
-    .result-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .result-card-head {
-      background: var(--black);
-      color: #fff;
-      padding: 13px 20px;
-      font-size: 0.83rem;
       font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2px;
     }
-    .result-body {
-      padding: 22px 20px;
+    .about-profile-role {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .about-chips {
       display: flex;
-      gap: 16px;
-      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
     }
-    .result-before, .result-after { flex: 1; text-align: center; }
-    .result-before-label, .result-after-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 5px;
+    .chip {
+      border: 1px solid var(--border);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--off-black);
+      letter-spacing: .04em;
     }
-    .result-before-label { color: var(--muted); }
-    .result-after-label  { color: var(--green-mid); }
-    .result-before-val { font-size: 1.4rem; font-weight: 800; color: var(--muted); }
-    .result-after-val  { font-size: 1.65rem; font-weight: 900; color: var(--green-mid); }
-    .result-arrow { font-size: 1.4rem; color: var(--accent); font-weight: 900; }
-    .result-desc { padding: 0 20px 18px; font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
 
-    /* ======= GREEN会 ======= */
-    .green-kai-wrap {
-      background: var(--black);
-      border-radius: 16px;
-      padding: 56px 48px;
-      color: #fff;
+    /* ── PROBLEMS ── */
+    .problems {
+      background: var(--beige);
+      padding: 120px 40px;
+      position: relative;
     }
-    .green-kai-wrap .label { color: var(--accent); }
-    .green-kai-wrap h2 { color: #fff; margin-bottom: 16px; }
-    .green-kai-body {
+    .problems-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      margin-bottom: 72px;
+    }
+    .section-num {
+      font-family: var(--serif);
+      font-size: clamp(80px, 10vw, 140px);
+      font-weight: 400;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -16px;
+    }
+    .section-head-right {}
+    .sec-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--amber);
+    }
+    .sec-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--black);
+      letter-spacing: -.01em;
+    }
+    .problems-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .problem-item {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 28px 22px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: .92rem;
+      color: var(--off-black);
+      transition: color .2s;
+    }
+    .problem-item:nth-child(odd) { border-right: 1px solid var(--border); padding-right: 28px; }
+    .problem-item:nth-child(even) { padding-left: 28px; }
+    .problem-num {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--amber);
+      font-weight: 400;
+      flex-shrink: 0;
+      min-width: 28px;
+    }
+    .problems-cta {
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .problems-cta p {
+      font-size: 1rem;
+      color: var(--off-black);
+      font-weight: 500;
+    }
+
+    /* ── STRENGTHS ── */
+    .strengths {
+      background: var(--black);
+      color: var(--beige);
+      padding: 120px 40px;
+    }
+    .strengths-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .strengths-header {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-top: 40px;
+      gap: 60px;
+      margin-bottom: 80px;
+      align-items: end;
     }
-    .green-kai-text p {
-      font-size: 0.93rem;
-      color: rgba(255,255,255,.75);
+    .strengths-header .sec-label { color: rgba(244,239,230,.4); }
+    .strengths-header .sec-label::before { background: var(--amber); }
+    .strengths-header .sec-title { color: var(--beige); }
+    .strengths-header-sub {
+      font-size: .92rem;
+      color: rgba(244,239,230,.5);
       line-height: 1.9;
-      margin-bottom: 16px;
+      align-self: end;
     }
-    .green-kai-text strong { color: #fff; }
-    .green-kai-points { display: flex; flex-direction: column; gap: 16px; }
-    .green-kai-point {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 10px;
-      padding: 18px 20px;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,.85);
-      line-height: 1.7;
-    }
-    .green-kai-point strong { color: #f5c96a; display: block; font-size: 0.92rem; margin-bottom: 4px; }
-
-    /* ======= CTA BAND ======= */
-    .cta-band {
-      background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
-      padding: 64px 20px;
-      text-align: center;
-    }
-    .cta-band h2 {
-      font-size: clamp(1.3rem, 4vw, 2rem);
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-    .cta-band p { color: rgba(255,255,255,.65); font-size: 0.95rem; margin-bottom: 32px; }
-    .cta-options {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-    .cta-note { font-size: 0.78rem; color: rgba(255,255,255,.4); }
-
-    /* ======= SERVICES ======= */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-    .service-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 26px 22px;
-      transition: box-shadow .2s, transform .2s;
-    }
-    .service-card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,.07);
-      transform: translateY(-3px);
-    }
-    .service-icon { font-size: 1.6rem; margin-bottom: 12px; }
-    .service-card h3 { font-size: 0.97rem; font-weight: 800; color: var(--black); margin-bottom: 7px; }
-    .service-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.75; }
-
-    /* ======= FLOW ======= */
-    .flow-list {
-      max-width: 680px;
-      margin: 0 auto 44px;
+    .strengths-list {
       display: flex;
       flex-direction: column;
     }
-    .flow-item {
+    .strength-item {
       display: grid;
-      grid-template-columns: 60px 1fr;
-      gap: 18px;
-      padding-bottom: 30px;
-      position: relative;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 40px;
+      padding: 36px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      align-items: start;
+      transition: background .2s;
     }
-    .flow-item:last-child { padding-bottom: 0; }
-    .flow-item::after {
-      content: '';
-      position: absolute;
-      left: 28px; top: 50px; bottom: 0;
-      width: 2px;
-      background: var(--border);
+    .strength-item:last-child { border-bottom: 1px solid rgba(255,255,255,.08); }
+    .strength-item-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      color: rgba(255,255,255,.15);
+      font-weight: 400;
+      line-height: 1;
     }
-    .flow-item:last-child::after { display: none; }
-    .flow-num {
-      width: 46px; height: 46px;
-      background: var(--black);
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.95rem;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
+    .strength-item-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--beige);
+      line-height: 1.4;
+      padding-top: 4px;
     }
-    .flow-body { padding-top: 8px; }
-    .flow-body h4 { font-size: 0.97rem; font-weight: 800; color: var(--black); margin-bottom: 4px; }
-    .flow-body p { font-size: 0.85rem; color: var(--muted); }
+    .strength-item-body {
+      font-size: .87rem;
+      color: rgba(244,239,230,.5);
+      line-height: 1.85;
+      padding-top: 4px;
+    }
 
-    /* ======= COLUMN ======= */
-    .columns-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      margin-bottom: 36px;
+    /* ── WORK ── */
+    .work {
+      background: var(--beige-d);
+      padding: 120px 40px;
     }
-    .column-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: box-shadow .2s, transform .2s;
+    .work-inner {
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .column-card:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,.07);
-      transform: translateY(-3px);
-    }
-    .column-thumb {
-      background: linear-gradient(135deg, var(--black) 0%, #333 100%);
-      height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-    }
-    .column-body { padding: 18px 20px 22px; }
-    .column-cat { font-size: 0.7rem; font-weight: 700; color: var(--green-mid); letter-spacing: 0.08em; margin-bottom: 6px; }
-    .column-body h3 { font-size: 0.93rem; font-weight: 700; color: var(--black); line-height: 1.5; margin-bottom: 7px; }
-    .column-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-
-    /* ======= COMPANY ======= */
-    .company-wrap {
+    .work-header {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      gap: 60px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+    .work-header-sub {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    .work-cell {
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      padding: 18px 20px;
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--off-black);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background .2s, color .2s;
+      cursor: default;
+    }
+    .work-cell:hover { background: var(--black); color: var(--beige); }
+    .work-cell-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .work-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .work-footer p {
+      font-size: .88rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: var(--amber);
+      padding: 72px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-strip-left {}
+    .cta-strip h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 44px);
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cta-strip p {
+      font-size: .88rem;
+      color: rgba(15,15,15,.6);
+    }
+    .cta-strip-right {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--beige);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      padding: 15px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .btn-dark:hover { opacity: .85; transform: translateY(-2px); }
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1.5px solid rgba(15,15,15,.3);
+      color: var(--black);
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: 15px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color .2s;
+    }
+    .btn-outline-dark:hover { border-color: var(--black); }
+
+    /* ── GREEN会 ── */
+    .greenkai {
+      background: var(--white);
+      padding: 120px 40px;
+    }
+    .greenkai-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .greenkai-left {}
+    .greenkai-big {
+      font-family: var(--serif);
+      font-size: clamp(60px, 8vw, 100px);
+      font-weight: 400;
+      color: var(--black);
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 40px;
+    }
+    .greenkai-big em { font-style: italic; color: var(--green); }
+    .greenkai-body p {
+      font-size: .93rem;
+      color: var(--muted);
+      line-height: 1.95;
+      margin-bottom: 16px;
+    }
+    .greenkai-body p strong { color: var(--off-black); }
+    .greenkai-note {
+      font-size: .75rem;
+      color: var(--border);
+      margin-top: 24px;
+      line-height: 1.7;
+    }
+    .greenkai-right {
+      padding-top: 12px;
+    }
+    .kai-point {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .kai-point:first-child { border-top: 1px solid var(--border); }
+    .kai-point-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .kai-point h4 {
+      font-size: .97rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .kai-point p {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--beige);
+      padding: 120px 40px;
+    }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .services-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 64px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .services-header-sub {
+      font-size: .88rem;
+      color: var(--muted);
+      max-width: 320px;
+      line-height: 1.8;
+      text-align: right;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .service-card {
+      background: var(--beige);
+      padding: 40px 36px;
+      transition: background .25s;
+      cursor: default;
+    }
+    .service-card:hover { background: var(--black); }
+    .service-card:hover .service-title { color: var(--beige); }
+    .service-card:hover .service-body { color: rgba(244,239,230,.5); }
+    .service-card:hover .service-icon-wrap { background: rgba(255,255,255,.08); border-color: transparent; }
+    .service-card:hover .service-num { color: rgba(255,255,255,.08); }
+    .service-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      color: var(--border);
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color .25s;
+    }
+    .service-icon-wrap {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      transition: background .25s, border-color .25s;
+    }
+    .service-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 10px;
+      transition: color .25s;
+      line-height: 1.35;
+    }
+    .service-body {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.75;
+      transition: color .25s;
+    }
+
+    /* ── FLOW ── */
+    .flow {
+      background: var(--white);
+      padding: 120px 40px;
+    }
+    .flow-inner { max-width: 1200px; margin: 0 auto; }
+    .flow-header { margin-bottom: 72px; }
+    .flow-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+    .flow-item {
+      padding: 36px 24px 36px 0;
+      border-right: 1px solid var(--border);
+      padding-right: 24px;
+      padding-left: 0;
+      position: relative;
+    }
+    .flow-item:last-child { border-right: none; padding-right: 0; }
+    .flow-item + .flow-item { padding-left: 24px; }
+    .flow-item-num {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      color: var(--border);
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .flow-item h4 {
+      font-size: .9rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .flow-item p { font-size: .8rem; color: var(--muted); line-height: 1.75; }
+    .flow-cta { margin-top: 64px; text-align: center; }
+    .flow-cta p { font-size: .78rem; color: var(--muted); margin-top: 12px; }
+
+    /* ── COLUMN ── */
+    .column {
+      background: var(--beige-d);
+      padding: 120px 40px;
+    }
+    .column-inner { max-width: 1200px; margin: 0 auto; }
+    .column-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .col-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .col-card {
+      background: var(--white);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .col-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.08); }
+    .col-thumb {
+      height: 160px;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .col-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,146,10,.2) 0%, transparent 60%);
+    }
+    .col-body { padding: 24px 24px 28px; }
+    .col-cat {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .col-body h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .col-body p { font-size: .8rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── COMPANY ── */
+    .company {
+      background: var(--beige);
+      padding: 120px 40px;
+    }
+    .company-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
       align-items: start;
     }
     .company-table { width: 100%; border-collapse: collapse; }
     .company-table tr { border-bottom: 1px solid var(--border); }
     .company-table th {
       text-align: left;
-      padding: 14px 12px 14px 0;
-      font-size: 0.82rem;
+      padding: 16px 0;
+      font-size: .75rem;
       font-weight: 700;
-      color: var(--black);
-      width: 110px;
+      letter-spacing: .06em;
+      color: var(--muted);
+      width: 100px;
       vertical-align: top;
     }
-    .company-table td { padding: 14px 0; font-size: 0.87rem; color: var(--muted); }
-
-    .hoken-box {
+    .company-table td {
+      padding: 16px 0;
+      font-size: .88rem;
+      color: var(--off-black);
+      line-height: 1.7;
+    }
+    .company-message {
       background: var(--black);
-      color: #fff;
-      border-radius: 14px;
-      padding: 36px 32px;
+      color: var(--beige);
+      padding: 48px 44px;
+      border-radius: 2px;
     }
-    .hoken-box h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 18px; line-height: 1.4; }
-    .hoken-box p { font-size: 0.9rem; color: rgba(255,255,255,.75); line-height: 1.9; margin-bottom: 14px; }
-    .hoken-sign { font-size: 0.85rem; color: rgba(255,255,255,.45); margin-top: 22px; }
+    .company-message-quote {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--beige);
+      margin-bottom: 32px;
+      letter-spacing: -.01em;
+    }
+    .company-message-quote em { font-style: italic; color: var(--amber-lt); }
+    .company-message p {
+      font-size: .87rem;
+      color: rgba(244,239,230,.6);
+      line-height: 1.95;
+      margin-bottom: 14px;
+    }
+    .company-message-sign {
+      font-size: .75rem;
+      color: rgba(244,239,230,.3);
+      margin-top: 28px;
+      letter-spacing: .06em;
+    }
 
-    /* ======= CONTACT ======= */
-    .contact-wrap {
-      max-width: 640px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: 16px;
-      padding: 48px 40px;
-      box-shadow: 0 4px 40px rgba(0,0,0,.07);
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--black);
+      padding: 120px 40px;
     }
-    .contact-wrap h2 { font-size: 1.4rem; font-weight: 900; color: var(--black); margin-bottom: 8px; }
-    .contact-wrap > p { font-size: 0.9rem; color: var(--muted); margin-bottom: 32px; line-height: 1.8; }
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-left {}
+    .contact-big {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 400;
+      color: var(--beige);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin-bottom: 28px;
+    }
+    .contact-big em { font-style: italic; color: var(--amber-lt); }
+    .contact-left p {
+      font-size: .92rem;
+      color: rgba(244,239,230,.5);
+      line-height: 1.95;
+      margin-bottom: 36px;
+    }
+    .contact-detail {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 28px;
+    }
+    .contact-detail-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+      font-size: .82rem;
+    }
+    .contact-detail-label {
+      color: rgba(244,239,230,.3);
+      min-width: 60px;
+      letter-spacing: .04em;
+    }
+    .contact-detail-val { color: rgba(244,239,230,.65); }
+    .contact-right {}
+    .contact-form {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 2px;
+      padding: 40px;
+    }
     .form-row { margin-bottom: 20px; }
-    .form-row label { display: block; font-size: 0.84rem; font-weight: 700; color: var(--black); margin-bottom: 6px; }
-    .req { background: var(--accent); color: #fff; font-size: 0.63rem; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+    .form-row label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(244,239,230,.4);
+      margin-bottom: 8px;
+    }
+    .req {
+      background: var(--amber);
+      color: var(--black);
+      font-size: .58rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 1px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: .06em;
+    }
     .form-row input,
     .form-row select,
     .form-row textarea {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      font-size: 0.93rem;
-      color: var(--text);
-      font-family: inherit;
-      background: var(--bg);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 2px;
+      font-size: .9rem;
+      color: var(--beige);
+      font-family: var(--sans);
       transition: border-color .2s, background .2s;
     }
+    .form-row input::placeholder,
+    .form-row textarea::placeholder { color: rgba(244,239,230,.25); }
+    .form-row select option { background: var(--off-black); color: var(--beige); }
     .form-row input:focus,
     .form-row select:focus,
-    .form-row textarea:focus { outline: none; border-color: var(--black); background: #fff; }
-    .form-row textarea { height: 120px; resize: vertical; }
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--amber);
+      background: rgba(255,255,255,.08);
+    }
+    .form-row textarea { height: 110px; resize: vertical; }
     .form-submit {
       width: 100%;
-      padding: 17px;
-      background: var(--accent);
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 900;
+      padding: 16px;
+      background: var(--amber);
+      color: var(--black);
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: .08em;
       border: none;
-      border-radius: 8px;
+      border-radius: 2px;
       cursor: pointer;
-      transition: opacity .2s, transform .15s;
-      letter-spacing: 0.03em;
+      transition: background .2s, transform .15s;
     }
-    .form-submit:hover { opacity: 0.9; transform: translateY(-1px); }
-    .form-note { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 12px; }
+    .form-submit:hover { background: var(--amber-lt); transform: translateY(-1px); }
+    .form-note {
+      text-align: center;
+      font-size: .72rem;
+      color: rgba(244,239,230,.25);
+      margin-top: 12px;
+      letter-spacing: .04em;
+    }
 
-    /* ======= FOOTER ======= */
-    footer { background: #111; color: rgba(255,255,255,.4); padding: 40px 20px 24px; }
-    .footer-inner {
-      max-width: 1060px;
-      margin: 0 auto;
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      padding: 32px 40px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 28px;
     }
-    .footer-logo { font-size: 1rem; font-weight: 900; color: #fff; }
-    .footer-links { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; }
-    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,.4); transition: color .2s; }
-    .footer-links a:hover { color: #fff; }
-    .footer-copy {
-      text-align: center;
-      font-size: 0.76rem;
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding-top: 20px;
-      max-width: 1060px;
-      margin: 0 auto;
+    .footer-logo {
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(244,239,230,.3);
     }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: .72rem;
+      color: rgba(244,239,230,.2);
+      text-decoration: none;
+      transition: color .2s;
+      letter-spacing: .04em;
+    }
+    .footer-links a:hover { color: rgba(244,239,230,.6); }
+    .footer-copy { font-size: .7rem; color: rgba(244,239,230,.15); letter-spacing: .06em; }
 
-    /* ======= FLOATING CTA ======= */
-    .floating-cta {
+    /* ── FLOATING CTA ── */
+    .floating {
       position: fixed;
-      bottom: 22px; right: 22px;
-      z-index: 300;
+      bottom: 28px; right: 28px;
+      z-index: 200;
     }
-    .floating-cta a {
+    .floating a {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--accent);
-      color: #fff;
+      background: var(--amber);
+      color: var(--black);
       padding: 13px 22px;
-      border-radius: 50px;
-      font-size: 0.88rem;
-      font-weight: 900;
-      box-shadow: 0 4px 20px rgba(232,160,32,.45);
-      transition: transform .15s, box-shadow .15s;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(212,146,10,.4);
+      transition: transform .2s, box-shadow .2s;
     }
-    .floating-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,160,32,.55); }
+    .floating a:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(212,146,10,.5); }
 
-    /* ======= RESPONSIVE ======= */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .mayuko-wrap { grid-template-columns: 1fr; gap: 32px; }
-      .company-wrap { grid-template-columns: 1fr; }
-      .green-kai-body { grid-template-columns: 1fr; gap: 28px; }
-      .green-kai-wrap { padding: 36px 24px; }
-      .contact-wrap { padding: 32px 20px; }
-      .section { padding: 64px 16px; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      header { padding: 0 20px; }
+      nav { display: none; }
+      .hero-inner { grid-template-columns: 1fr; padding: 120px 20px 48px; }
+      .hero-right { display: none; }
+      .hero-bottom { padding: 16px 20px; }
+      .about { padding: 80px 20px; }
+      .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .about-body { grid-template-columns: 1fr; gap: 24px; }
+      .problems { padding: 80px 20px; }
+      .section-header { gap: 20px; flex-direction: column; }
+      .section-num { font-size: 80px; }
+      .problems-list { grid-template-columns: 1fr; }
+      .problem-item:nth-child(odd) { border-right: none; padding-right: 0; }
+      .problem-item:nth-child(even) { padding-left: 0; }
+      .strengths { padding: 80px 20px; }
+      .strengths-header { grid-template-columns: 1fr; gap: 24px; }
+      .strength-item { grid-template-columns: 60px 1fr; gap: 20px; }
+      .strength-item-body { grid-column: 2; }
+      .work { padding: 80px 20px; }
+      .work-header { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-strip { padding: 56px 20px; }
+      .greenkai { padding: 80px 20px; }
+      .greenkai-inner { grid-template-columns: 1fr; gap: 48px; }
+      .services { padding: 80px 20px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow { padding: 80px 20px; }
+      .flow-list { grid-template-columns: 1fr; border-top: none; }
+      .flow-item { border-right: none; border-top: 1px solid var(--border); padding-left: 0; padding-right: 0; }
+      .flow-item + .flow-item { padding-left: 0; }
+      .column { padding: 80px 20px; }
+      .col-grid { grid-template-columns: 1fr; }
+      .company { padding: 80px 20px; }
+      .company-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact { padding: 80px 20px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+      .floating { bottom: 16px; right: 16px; }
     }
-    @media (max-width: 480px) {
-      .result-body { flex-direction: column; gap: 8px; }
-      .soy-banner { padding: 24px 20px; gap: 16px; }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .fade-up { animation: fadeUp .6s ease both; }
-    .d1 { animation-delay: .1s; }
-    .d2 { animation-delay: .22s; }
-    .d3 { animation-delay: .34s; }
-    .d4 { animation-delay: .46s; }
   </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
+  <div class="logo">GREEN<em>通商</em></div>
   <nav>
-    <div class="logo">GREEN<span>通商</span></div>
-    <ul class="nav-links">
-      <li><a href="#about">溝口について</a></li>
-      <li><a href="#problems">お悩み</a></li>
-      <li><a href="#strengths">強み</a></li>
-      <li><a href="#green-kai">GREEN会</a></li>
-      <li><a href="#column">コラム</a></li>
-      <li><a href="#contact" class="nav-cta">無料相談</a></li>
-    </ul>
+    <a href="#about">溝口について</a>
+    <a href="#problems">お悩み</a>
+    <a href="#strengths">強み</a>
+    <a href="#green-kai">GREEN会</a>
+    <a href="#services">サービス</a>
+    <a href="#column">コラム</a>
+    <a href="#contact" class="nav-cta">無料相談</a>
   </nav>
 </header>
 
-<!-- FLOATING CTA -->
-<div class="floating-cta">
-  <a href="#contact">💬 まずは相談</a>
+<!-- FLOATING -->
+<div class="floating">
+  <a href="#contact">相談する →</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-text">EC</div>
   <div class="hero-inner">
-    <div class="hero-badge fade-up">楽天市場 · Amazon · Yahoo! · 自社EC 対応</div>
-    <h1 class="fade-up d1">
-      ECの<em>"次"</em>を、<br>一緒につくりましょう。
-    </h1>
-    <p class="hero-sub fade-up d2">
-      楽天市場を中心に、EC運営の現場に深く入り込み、<br>
-      戦略から実装まで一緒に動くEC伴走支援会社です。
-    </p>
-    <p class="hero-name fade-up d2">代表・溝口真由子（ECデザイン・コンサル歴24年）</p>
-    <div class="hero-tags fade-up d3">
-      <span class="hero-tag">楽天SEO</span>
-      <span class="hero-tag">商品ページ改善</span>
-      <span class="hero-tag">RPP/TDA広告</span>
-      <span class="hero-tag">LINE施策</span>
-      <span class="hero-tag">CRM</span>
-      <span class="hero-tag">伴走型支援</span>
-      <span class="hero-tag">SOY受賞店舗7社</span>
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span>EC Consulting &amp; Design — Since 2000</span>
+      </div>
+      <h1>
+        ECの<em>"次"</em>を、<br>
+        一緒に<br>
+        つくりましょう。
+      </h1>
+      <p class="hero-sub">
+        楽天市場を中心に、EC運営の現場に深く入り込み、<br>
+        戦略から実装まで一緒に動くEC伴走支援会社。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">まずは無料相談 →</a>
+        <a href="#about" class="btn-ghost">溝口について</a>
+      </div>
+      <p class="hero-note">壁打ち歓迎 &nbsp;·&nbsp; 現状相談OK &nbsp;·&nbsp; 完全無料</p>
     </div>
-    <div class="hero-btns fade-up d4">
-      <a href="#contact" class="btn btn--accent">まずは無料相談 →</a>
-      <a href="#results" class="btn btn--outline">実績を見る</a>
+    <div class="hero-right">
+      <div class="hero-profile-name">溝口 真由子</div>
+      <div class="hero-profile-role">代表取締役<br>ECデザイン・コンサル歴 24年</div>
+      <div class="hero-tags">
+        <div class="hero-tag">楽天市場 SEO改善</div>
+        <div class="hero-tag">商品ページ・バナー制作</div>
+        <div class="hero-tag">RPP / TDA広告改善</div>
+        <div class="hero-tag">LINE施策・CRM</div>
+        <div class="hero-tag">伴走型 EC支援</div>
+        <div class="hero-tag">SOY受賞店舗 支援実績あり</div>
+      </div>
     </div>
-    <p class="hero-note fade-up d4">壁打ち歓迎 · 現状相談OK · 完全無料</p>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-bottom-left">千葉県千葉市 &nbsp;/&nbsp; 社員3名</div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
   </div>
 </section>
 
-<!-- ABOUT MAYUKO -->
-<section id="about" class="section section--white">
-  <div class="container">
-    <div class="label">About</div>
-    <h2 class="section-title">あなたの会社の、<br>もう一人のメンバーでいたい。</h2>
-    <div class="mayuko-wrap">
-      <div class="mayuko-img">
-        ここに溝口真由子さんの<br>写真が入ります
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">楽天SEO<div class="marquee-dot"></div></div>
+    <div class="marquee-item">商品ページ改善<div class="marquee-dot"></div></div>
+    <div class="marquee-item">RPP広告<div class="marquee-dot"></div></div>
+    <div class="marquee-item">TDA広告<div class="marquee-dot"></div></div>
+    <div class="marquee-item">LINE施策<div class="marquee-dot"></div></div>
+    <div class="marquee-item">CRM改善<div class="marquee-dot"></div></div>
+    <div class="marquee-item">スーパーSALE<div class="marquee-dot"></div></div>
+    <div class="marquee-item">販促企画<div class="marquee-dot"></div></div>
+    <div class="marquee-item">SNS企画<div class="marquee-dot"></div></div>
+    <div class="marquee-item">売上分析<div class="marquee-dot"></div></div>
+    <div class="marquee-item">伴走支援<div class="marquee-dot"></div></div>
+    <div class="marquee-item">楽天SEO<div class="marquee-dot"></div></div>
+    <div class="marquee-item">商品ページ改善<div class="marquee-dot"></div></div>
+    <div class="marquee-item">RPP広告<div class="marquee-dot"></div></div>
+    <div class="marquee-item">TDA広告<div class="marquee-dot"></div></div>
+    <div class="marquee-item">LINE施策<div class="marquee-dot"></div></div>
+    <div class="marquee-item">CRM改善<div class="marquee-dot"></div></div>
+    <div class="marquee-item">スーパーSALE<div class="marquee-dot"></div></div>
+    <div class="marquee-item">販促企画<div class="marquee-dot"></div></div>
+    <div class="marquee-item">SNS企画<div class="marquee-dot"></div></div>
+    <div class="marquee-item">売上分析<div class="marquee-dot"></div></div>
+    <div class="marquee-item">伴走支援<div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="about-inner">
+    <div class="about-label reveal">About</div>
+    <div class="about-content reveal">
+      <h2 class="about-headline">
+        あなたの会社の、<br>
+        <em>もう一人のメンバー</em><br>
+        でいたい。
+      </h2>
+      <div class="about-body">
+        <p>
+          クライアントの会社の<strong>一メンバーのような感覚</strong>で、ずっと仕事をしてきました。「こうした方がいいですよ」で終わるのではなく、実際に考えて、動いて、一緒に改善する。それが自分のスタイルです。
+        </p>
+        <p>
+          楽しく働くことが大事だと思っています。仕事がうまくいっているときって、たいてい<strong>現場が楽しくなっているとき</strong>です。だから数字だけじゃなく、現場の空気や人の気持ちも大切にしています。長年そうやってきて、今があります。
+        </p>
       </div>
-      <div class="mayuko-body">
-        <div class="mayuko-name">溝口 真由子</div>
-        <div class="mayuko-title">株式会社GREEN通商 代表 ／ ECコンサルティング・デザイン歴24年</div>
-        <p>
-          クライアントの会社の<strong>一メンバーのような感覚</strong>で、
-          ずっと仕事をしてきました。
-          「こうした方がいいですよ」で終わるのではなく、
-          実際に考えて、動いて、一緒に改善する。それが自分のスタイルです。
-        </p>
-        <p>
-          楽しく働くことが大事だと思っています。
-          クライアントも、自分たちも。
-          仕事がうまくいっているときって、たいてい<strong>現場が楽しくなっているとき</strong>です。
-          だから数字だけじゃなく、現場の空気や人の気持ちも大切にしています。
-        </p>
-        <p>
-          デザイン会社出身なので、クリエイティブを軸にしたコンサルが特徴です。
-          毎日、楽天の商品ページ改善・LINE配信・広告改善・売上分析を
-          <strong>実務レベルで</strong>クライアントと一緒に動いています。
-          長年そうやってきて、今があります。
-        </p>
-        <div class="mayuko-tags">
-          <span class="mayuko-tag">現場主義</span>
-          <span class="mayuko-tag">伴走型</span>
-          <span class="mayuko-tag">デザイン×コンサル</span>
-          <span class="mayuko-tag">試して磨く</span>
-          <span class="mayuko-tag">親しみやすさ</span>
-          <span class="mayuko-tag">ファン化重視</span>
+      <div class="about-profile">
+        <div class="about-profile-initial">M</div>
+        <div>
+          <div class="about-profile-name">溝口 真由子</div>
+          <div class="about-profile-role">株式会社GREEN通商 代表取締役<br>ECデザイン・コンサルティング歴 24年</div>
         </div>
+      </div>
+      <div class="about-chips">
+        <span class="chip">現場主義</span>
+        <span class="chip">伴走型</span>
+        <span class="chip">デザイン × コンサル</span>
+        <span class="chip">試して磨く</span>
+        <span class="chip">ファン化重視</span>
+        <span class="chip">社員3名</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PROBLEMS -->
-<section id="problems" class="section">
-  <div class="container">
-    <div class="label">こんなお悩みありませんか？</div>
-    <h2 class="section-title">EC、一人で抱えていませんか？</h2>
-    <p class="section-sub">多くの店舗が同じところで詰まっています。一人で悩まず、まず話してみてください。</p>
-    <div class="problems-grid">
-      <div class="problem-card">楽天の自然検索順位が上がらない</div>
-      <div class="problem-card">広告費をかけても売上につながらない</div>
-      <div class="problem-card">商品ページ、何から手をつければいいかわからない</div>
-      <div class="problem-card">LINEでリピーターが全然増えない</div>
-      <div class="problem-card">EC担当が少なく、施策が全然進まない</div>
-      <div class="problem-card">競合に差をつけられている感覚がある</div>
-      <div class="problem-card">代理店に任せているが成果が見えない</div>
-      <div class="problem-card">何が課題かすらわからない状態</div>
-      <div class="problem-card">値引きだけの戦いに疲れてきた</div>
-      <div class="problem-card">ファン・リピーターを増やしたいが方法がわからない</div>
+<section id="problems" class="problems">
+  <div class="problems-inner">
+    <div class="section-header">
+      <div class="section-num reveal">01</div>
+      <div class="section-head-right reveal">
+        <div class="sec-label">こんなお悩みありませんか？</div>
+        <h2 class="sec-title">EC、一人で<br>抱えていませんか？</h2>
+      </div>
     </div>
-    <div class="problem-resolve">
-      <p>その悩み、GREEN通商に話してみてください。<br>現状を整理するだけでも、きっと前が見えます。</p>
-      <a href="#contact" class="btn btn--accent">現状を相談する（無料）</a>
+    <div class="problems-list reveal">
+      <div class="problem-item"><span class="problem-num">1</span>楽天の自然検索順位が上がらない</div>
+      <div class="problem-item"><span class="problem-num">2</span>広告費をかけても売上につながらない</div>
+      <div class="problem-item"><span class="problem-num">3</span>商品ページ、何から手をつければいいかわからない</div>
+      <div class="problem-item"><span class="problem-num">4</span>LINEでリピーターが全然増えない</div>
+      <div class="problem-item"><span class="problem-num">5</span>EC担当が少なく、施策が全然進まない</div>
+      <div class="problem-item"><span class="problem-num">6</span>競合に差をつけられている感覚がある</div>
+      <div class="problem-item"><span class="problem-num">7</span>代理店に任せているが成果が見えない</div>
+      <div class="problem-item"><span class="problem-num">8</span>値引きだけの戦いに疲れてきた</div>
+      <div class="problem-item"><span class="problem-num">9</span>ファン・リピーターを増やしたいが方法がわからない</div>
+      <div class="problem-item"><span class="problem-num">10</span>何が課題かすらわからない状態</div>
+    </div>
+    <div class="problems-cta reveal">
+      <p>その悩み、まず話してみてください。<br>現状を整理するだけでも、きっと前が見えます。</p>
+      <a href="#contact" class="btn-dark">現状を相談する（無料）→</a>
     </div>
   </div>
 </section>
 
 <!-- STRENGTHS -->
-<section id="strengths" class="section">
-  <div class="container">
-    <div class="label">Why GREEN通商</div>
-    <h2 class="section-title">小さいから、できること。<br>信頼があるから、深く入れる。</h2>
-    <p class="section-sub">大人数の会社ではありません。3名だからこそ、担当者が直接動き、信頼関係を大切にした伴走ができます。</p>
-    <div class="strengths-grid">
-      <div class="strength-card">
-        <div class="strength-num">01</div>
-        <h3>小さいから、深く関われる。</h3>
-        <p>窓口と実務が同じ人間。話した内容がすぐ動きに変わります。大きな会社にありがちな「言ったけど動かない」がありません。</p>
+<section id="strengths" class="strengths">
+  <div class="strengths-inner">
+    <div class="strengths-header">
+      <div class="reveal">
+        <div class="sec-label">Why GREEN通商</div>
+        <h2 class="sec-title" style="color:var(--beige);">小さいから、できること。<br>信頼があるから、深く入れる。</h2>
       </div>
-      <div class="strength-card">
-        <div class="strength-num">02</div>
-        <h3>信頼関係が、一番の武器。</h3>
-        <p>数字だけの関係ではなく、担当者の事情・会社の背景まで理解した上で動きます。長く付き合えるパートナーを目指しています。</p>
+      <p class="strengths-header-sub reveal">大人数の会社ではありません。3名だからこそ、担当者が直接動き、信頼関係を大切にした伴走ができます。</p>
+    </div>
+    <div class="strengths-list">
+      <div class="strength-item reveal">
+        <div class="strength-item-num">01</div>
+        <div class="strength-item-title">小さいから、深く関われる。</div>
+        <div class="strength-item-body">窓口と実務が同じ人間。話した内容がすぐ動きに変わります。「言ったけど動かない」がありません。</div>
       </div>
-      <div class="strength-card">
-        <div class="strength-num">03</div>
-        <h3>「100試して10当てる」精神。</h3>
-        <p>完璧を待たない。仮説→実行→改善を繰り返す。理論ではなく「実際に売れたか」が全ての判断基準です。</p>
+      <div class="strength-item reveal">
+        <div class="strength-item-num">02</div>
+        <div class="strength-item-title">信頼関係が、一番の武器。</div>
+        <div class="strength-item-body">数字だけの関係ではなく、担当者の事情・会社の背景まで理解した上で動きます。長く付き合えるパートナーを目指しています。</div>
       </div>
-      <div class="strength-card">
-        <div class="strength-num">04</div>
-        <h3>戦略から実装まで、自分たちで動く。</h3>
-        <p>課題分析・施策立案・実行・効果測定を同じ人間が担当。「提案だけ」「制作だけ」になりません。</p>
+      <div class="strength-item reveal">
+        <div class="strength-item-num">03</div>
+        <div class="strength-item-title">「100試して10当てる」精神。</div>
+        <div class="strength-item-body">完璧を待たない。仮説→実行→改善を繰り返す。理論ではなく「実際に売れたか」が全ての判断基準です。</div>
       </div>
-      <div class="strength-card">
-        <div class="strength-num">05</div>
-        <h3>売上だけじゃなく、ファン化を重視。</h3>
-        <p>値引きだけの戦いは長続きしない。リピート・ファン化・選ばれる理由づくりを、売上改善と同時に進めます。</p>
+      <div class="strength-item reveal">
+        <div class="strength-item-num">04</div>
+        <div class="strength-item-title">戦略から実装まで、自分たちで動く。</div>
+        <div class="strength-item-body">課題分析・施策立案・実行・効果測定を同じ人間が担当。「提案だけ」「制作だけ」になりません。</div>
       </div>
-      <div class="strength-card">
-        <div class="strength-num">06</div>
-        <h3>「何でも聞いて」が本音。</h3>
-        <p>「こんなこと聞いていいのか」という相談こそ歓迎。上から目線は嫌い。一緒に考えることを大切にしています。</p>
+      <div class="strength-item reveal">
+        <div class="strength-item-num">05</div>
+        <div class="strength-item-title">売上だけじゃなく、ファン化を重視。</div>
+        <div class="strength-item-body">値引きだけの戦いは長続きしない。リピート・ファン化・選ばれる理由づくりを売上改善と同時に進めます。</div>
+      </div>
+      <div class="strength-item reveal">
+        <div class="strength-item-num">06</div>
+        <div class="strength-item-title">「何でも聞いて」が本音。</div>
+        <div class="strength-item-body">「こんなこと聞いていいのか」という相談こそ歓迎。上から目線は嫌い。一緒に考えることを大切にしています。</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WORK DETAIL -->
-<section class="section section--white">
-  <div class="container">
-    <div class="label">Daily Work</div>
-    <h2 class="section-title">机上の空論ではない。<br>毎日、現場で動いています。</h2>
-    <p class="section-sub">コンサルタントではなく、実務家。溝口が日々クライアントと一緒に取り組んでいる業務の一部です。</p>
-    <div class="work-grid">
-      <div class="work-item">楽天 商品ページ改善</div>
-      <div class="work-item">商品名・SEO改善</div>
-      <div class="work-item">特設会場企画</div>
-      <div class="work-item">スーパーSALE施策</div>
-      <div class="work-item">LINE配信設計</div>
-      <div class="work-item">CRM改善</div>
-      <div class="work-item">RPP広告改善</div>
-      <div class="work-item">TDA広告改善</div>
-      <div class="work-item">SNS企画</div>
-      <div class="work-item">PR TIMES企画</div>
-      <div class="work-item">季節イベント企画</div>
-      <div class="work-item">売上分析</div>
-      <div class="work-item">転換率分析</div>
-      <div class="work-item">商品訴求改善</div>
-      <div class="work-item">販促企画</div>
-      <div class="work-item">店長代行サポート</div>
+<!-- WORK -->
+<section class="work">
+  <div class="work-inner">
+    <div class="work-header">
+      <div class="reveal">
+        <div class="sec-label">Daily Work</div>
+        <h2 class="sec-title">机上の空論ではない。<br>毎日、現場で動いています。</h2>
+      </div>
+      <p class="work-header-sub reveal">コンサルタントではなく、実務家。溝口が日々クライアントと一緒に取り組んでいる業務の一部です。ジャンルが違っても「売れる型」を応用できるのが、24年の現場経験から生まれた強みです。</p>
     </div>
-    <p style="font-size:0.88rem; color:var(--muted); line-height:1.85;">
-      「どうやって売れるか」を毎日考え、実際に手を動かしています。<br>
-      ジャンルが違っても<strong style="color:var(--black);">「売れる型」を応用できる</strong>のが、24年の現場経験から生まれた強みです。
-    </p>
-    <div style="margin-top:32px;">
-      <a href="#contact" class="btn btn--black">一緒に動いてほしい →</a>
+    <div class="work-grid reveal">
+      <div class="work-cell"><div class="work-cell-dot"></div>楽天 商品ページ改善</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>商品名・SEO改善</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>特設会場企画</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>スーパーSALE施策</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>LINE配信設計</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>CRM改善</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>RPP広告改善</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>TDA広告改善</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>SNS企画</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>PR TIMES企画</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>季節イベント企画</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>売上分析</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>転換率分析</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>商品訴求改善</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>販促企画</div>
+      <div class="work-cell"><div class="work-cell-dot"></div>店長代行サポート</div>
+    </div>
+    <div class="work-footer reveal">
+      <p>「どうやって売れるか」を毎日考え、実際に手を動かしています。支援先には楽天SOY（Shop of the Year）受賞店舗も複数含まれます。</p>
+      <a href="#contact" class="btn-dark">一緒に動いてほしい →</a>
     </div>
   </div>
 </section>
 
-<!-- CTA BAND 1 -->
-<div class="cta-band">
-  <h2>まず話すだけでも、前が見えてきます。</h2>
-  <p>課題整理だけでもOK。壁打ち歓迎。費用の話は後回しでいいです。</p>
-  <div class="cta-options">
-    <a href="#contact" class="btn btn--accent">無料で相談する →</a>
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-strip-left reveal">
+    <h2>まず話すだけでも、<br>前が見えてきます。</h2>
+    <p>課題整理だけでもOK。壁打ち歓迎。費用の話は後回しでいいです。</p>
   </div>
-  <p class="cta-note">営業・押し売りは一切しません</p>
+  <div class="cta-strip-right reveal">
+    <a href="#contact" class="btn-dark">無料で相談する →</a>
+    <a href="#services" class="btn-outline-dark">サービスを見る</a>
+  </div>
 </div>
 
 <!-- GREEN会 -->
-<section id="green-kai" class="section">
-  <div class="container">
-    <div class="green-kai-wrap">
-      <div class="label">GREEN会</div>
-      <h2 class="section-title section-title--white" style="margin-top:4px;">みんなで試して、<br>みんなで強くなる。</h2>
-      <div class="green-kai-body">
-        <div class="green-kai-text">
-          <p>
-            GREEN会は、GREEN通商のクライアント同士が集まり、
-            <strong>成功も失敗も本音で共有する</strong>勉強会です。
-          </p>
-          <p>
-            上から教えるセミナーではありません。
-            「やってみたけどダメだった施策」も、「こうしたらうまくいった」も、
-            フラットに共有します。
-          </p>
-          <p>
-            できない理由を探すより、
-            <strong>「どうやったらできるか？」を考える場</strong>にしたい。
-            それがGREEN会の精神です。
-          </p>
-          <p style="font-size:0.82rem; color:rgba(255,255,255,.45); margin-top:20px;">
-            ※一定以上の伴走契約企業のみ参加可能。参加には既存会員の合意が必要な、信頼を重視した特別なコミュニティです。
-          </p>
+<section id="green-kai" class="greenkai">
+  <div class="greenkai-inner">
+    <div class="greenkai-left reveal">
+      <div class="sec-label">GREEN会</div>
+      <div class="greenkai-big">みんなで<br>試して、<br><em>強くなる。</em></div>
+    </div>
+    <div class="greenkai-right reveal">
+      <div class="greenkai-body">
+        <p>GREEN会は、GREEN通商のクライアント同士が集まり、<strong>成功も失敗も本音で共有する</strong>勉強会です。上から教えるセミナーではありません。</p>
+        <p>「やってみたけどダメだった施策」も、「こうしたらうまくいった」も、フラットに共有します。できない理由を探すより、<strong>「どうやったらできるか？」を考える場</strong>にしたい。それがGREEN会の精神です。</p>
+        <p class="greenkai-note">※一定以上の伴走契約企業のみ参加可能。参加には既存会員の合意が必要な、信頼を重視した特別なコミュニティです。</p>
+      </div>
+      <div style="margin-top:40px;">
+        <div class="kai-point">
+          <div class="kai-point-label">01</div>
+          <h4>本音のEC情報共有</h4>
+          <p>成功事例だけでなく、失敗した施策もオープンに共有。リアルな現場の知恵が集まります。</p>
         </div>
-        <div class="green-kai-points">
-          <div class="green-kai-point">
-            <strong>本音のEC情報共有</strong>
-            成功事例だけでなく、失敗した施策もオープンに共有。リアルな現場の知恵が集まります。
-          </div>
-          <div class="green-kai-point">
-            <strong>横のつながりができる</strong>
-            ジャンルを越えた店舗同士が繋がり、お互いに刺激し合える環境です。
-          </div>
-          <div class="green-kai-point">
-            <strong>「できない理由」より「どうすればできるか」</strong>
-            現場主義のカルチャーを大切にした場です。
-          </div>
+        <div class="kai-point">
+          <div class="kai-point-label">02</div>
+          <h4>横のつながりができる</h4>
+          <p>ジャンルを越えた店舗同士が繋がり、お互いに刺激し合える環境です。</p>
+        </div>
+        <div class="kai-point">
+          <div class="kai-point-label">03</div>
+          <h4>「できない理由」より「どうすればできるか」</h4>
+          <p>現場主義のカルチャーを大切にした場です。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BAND 2 -->
-<div class="cta-band">
-  <h2>「ちょっと聞いてみたい」<br>それで十分です。</h2>
-  <p>相談のハードルを下げることを、一番大切にしています。</p>
-  <div class="cta-options">
-    <a href="#contact" class="btn btn--accent">無料で相談する →</a>
-  </div>
-  <p class="cta-note">壁打ち歓迎 · 現状相談OK · 営業しません</p>
-</div>
-
 <!-- SERVICES -->
-<section id="services" class="section section--white">
-  <div class="container">
-    <div class="label">Services</div>
-    <h2 class="section-title">サービス一覧</h2>
-    <p class="section-sub">単体でも、複数組み合わせでも対応可能です。「何から始めればいいかわからない」という相談も歓迎です。</p>
-    <div class="services-grid">
+<section id="services" class="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <div class="reveal">
+        <div class="sec-label">Services</div>
+        <h2 class="sec-title">サービス一覧</h2>
+      </div>
+      <p class="services-header-sub reveal">単体でも、複数組み合わせでも対応可能です。「何から始めればいいかわからない」という相談も歓迎です。</p>
+    </div>
+    <div class="services-grid reveal">
       <div class="service-card">
-        <div class="service-icon">🔍</div>
-        <h3>楽天SEO対策</h3>
-        <p>キーワード選定・商品名改善・説明文最適化。自然検索流入を増やし、広告依存を下げます。</p>
+        <div class="service-num">01</div>
+        <div class="service-icon-wrap">🔍</div>
+        <div class="service-title">楽天SEO対策</div>
+        <div class="service-body">キーワード選定・商品名改善・説明文最適化。自然検索流入を増やし、広告依存を下げます。</div>
       </div>
       <div class="service-card">
-        <div class="service-icon">📣</div>
-        <h3>RPP / TDA広告改善</h3>
-        <p>広告構造の見直しから入札戦略まで。「費用はかけているのに成果が出ない」を改善します。</p>
+        <div class="service-num">02</div>
+        <div class="service-icon-wrap">📣</div>
+        <div class="service-title">RPP / TDA広告改善</div>
+        <div class="service-body">広告構造の見直しから入札戦略まで。「費用はかけているのに成果が出ない」を改善します。</div>
       </div>
       <div class="service-card">
-        <div class="service-icon">💬</div>
-        <h3>LINE施策・CRM</h3>
-        <p>リピーター育成のためのLINEシナリオ設計・顧客セグメント別アプローチ。ファン化を促進します。</p>
+        <div class="service-num">03</div>
+        <div class="service-icon-wrap">💬</div>
+        <div class="service-title">LINE施策・CRM</div>
+        <div class="service-body">リピーター育成のためのLINEシナリオ設計・顧客セグメント別アプローチ。ファン化を促進します。</div>
       </div>
       <div class="service-card">
-        <div class="service-icon">🎨</div>
-        <h3>商品ページ・バナー制作</h3>
-        <p>デザイン会社出身ならではのクリエイティブ力。転換率を意識した「売れるページ」を作ります。</p>
+        <div class="service-num">04</div>
+        <div class="service-icon-wrap">🎨</div>
+        <div class="service-title">商品ページ・バナー制作</div>
+        <div class="service-body">デザイン会社出身ならではのクリエイティブ力。転換率を意識した「売れるページ」を作ります。</div>
       </div>
       <div class="service-card">
-        <div class="service-icon">📊</div>
-        <h3>EC戦略・販促企画</h3>
-        <p>スーパーSALE施策・季節イベント企画・特設会場企画など、売上の波を作る仕掛けを一緒に考えます。</p>
+        <div class="service-num">05</div>
+        <div class="service-icon-wrap">📊</div>
+        <div class="service-title">EC戦略・販促企画</div>
+        <div class="service-body">スーパーSALE・季節イベント・特設会場企画など、売上の波を作る仕掛けを一緒に考えます。</div>
       </div>
       <div class="service-card">
-        <div class="service-icon">📱</div>
-        <h3>SNS・PR企画</h3>
-        <p>SNS運用方針の設計・PR TIMES活用など、EC外からの流入づくりを支援します。</p>
+        <div class="service-num">06</div>
+        <div class="service-icon-wrap">📱</div>
+        <div class="service-title">SNS・PR企画</div>
+        <div class="service-body">SNS運用方針の設計・PR TIMES活用など、EC外からの流入づくりを支援します。</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FLOW -->
-<section class="section">
-  <div class="container">
-    <div class="label">Flow</div>
-    <h2 class="section-title" style="text-align:center;">相談から始まる流れ</h2>
-    <p class="section-sub" style="margin:0 auto 52px; text-align:center;">難しい手続きはありません。まず話すだけで大丈夫です。</p>
-    <div class="flow-list">
+<section class="flow">
+  <div class="flow-inner">
+    <div class="flow-header reveal">
+      <div class="sec-label">Flow</div>
+      <h2 class="sec-title">相談から始まる流れ</h2>
+    </div>
+    <div class="flow-list reveal">
       <div class="flow-item">
-        <div class="flow-num">1</div>
-        <div class="flow-body">
-          <h4>無料相談（オンライン or 電話）</h4>
-          <p>現状・課題・目標を自由に話してください。この段階で費用の話は不要です。壁打ちでもOK。</p>
-        </div>
+        <div class="flow-item-num">01</div>
+        <h4>無料相談</h4>
+        <p>現状・課題・目標を自由に話してください。費用の話は不要。壁打ちでもOK。</p>
       </div>
       <div class="flow-item">
-        <div class="flow-num">2</div>
-        <div class="flow-body">
-          <h4>現状分析・改善ポイントの整理</h4>
-          <p>ECデータや店舗状況をもとに課題を整理し、優先して取り組む施策をご提案します。</p>
-        </div>
+        <div class="flow-item-num">02</div>
+        <h4>現状分析・整理</h4>
+        <p>ECデータや店舗状況をもとに課題を整理し、優先施策をご提案します。</p>
       </div>
       <div class="flow-item">
-        <div class="flow-num">3</div>
-        <div class="flow-body">
-          <h4>プランのご提案・お見積り</h4>
-          <p>ご予算・規模・体制に合わせたプランをご提案。納得いただけたらスタートです。</p>
-        </div>
+        <div class="flow-item-num">03</div>
+        <h4>プラン提案</h4>
+        <p>ご予算・規模・体制に合わせたプランをご提案。納得いただけたらスタート。</p>
       </div>
       <div class="flow-item">
-        <div class="flow-num">4</div>
-        <div class="flow-body">
-          <h4>施策実行・月次レビュー</h4>
-          <p>毎月の数字を一緒に確認しながら、次の一手を考えます。報告だけでは終わりません。</p>
-        </div>
+        <div class="flow-item-num">04</div>
+        <h4>施策実行</h4>
+        <p>毎月の数字を一緒に確認しながら次の一手を考えます。報告だけでは終わりません。</p>
       </div>
       <div class="flow-item">
-        <div class="flow-num">5</div>
-        <div class="flow-body">
-          <h4>継続改善・長期伴走</h4>
-          <p>EC成長に終わりはありません。試して、磨いて、強くなる。長期的なパートナーとして伴走します。</p>
-        </div>
+        <div class="flow-item-num">05</div>
+        <h4>長期伴走</h4>
+        <p>試して、磨いて、強くなる。長期的なパートナーとして伴走し続けます。</p>
       </div>
     </div>
-    <div style="text-align:center;">
-      <a href="#contact" class="btn btn--accent">まず相談してみる →</a>
-      <p style="margin-top:12px; font-size:0.78rem; color:var(--muted);">壁打ち歓迎・現状相談OK・費用の話は後でOK</p>
+    <div class="flow-cta reveal">
+      <a href="#contact" class="btn-dark">まず相談してみる →</a>
+      <p>壁打ち歓迎・現状相談OK・費用の話は後でOK</p>
     </div>
   </div>
 </section>
 
 <!-- COLUMN -->
-<section id="column" class="section section--white">
-  <div class="container">
-    <div class="label">Column</div>
-    <h2 class="section-title">ECノウハウコラム</h2>
-    <p class="section-sub">現場で使えるEC運営のノウハウを発信しています。「試して磨いた」実務から生まれた情報です。</p>
-    <div class="columns-grid">
-      <div class="column-card">
-        <div class="column-thumb">🔍</div>
-        <div class="column-body">
-          <div class="column-cat">楽天SEO</div>
+<section id="column" class="column">
+  <div class="column-inner">
+    <div class="column-header">
+      <div class="reveal">
+        <div class="sec-label">Column</div>
+        <h2 class="sec-title">ECノウハウコラム</h2>
+      </div>
+      <a href="#" class="btn-outline-dark btn-sm reveal" style="font-size:.78rem;padding:10px 20px;border-radius:2px;">すべて見る →</a>
+    </div>
+    <div class="col-grid">
+      <div class="col-card reveal">
+        <div class="col-thumb">🔍</div>
+        <div class="col-body">
+          <div class="col-cat">楽天SEO</div>
           <h3>楽天SEOで最初にやるべき5つのこと【2024年版】</h3>
           <p>検索順位を上げるために、まず手をつけるべき施策を現場目線で解説。</p>
         </div>
       </div>
-      <div class="column-card">
-        <div class="column-thumb">💬</div>
-        <div class="column-body">
-          <div class="column-cat">LINE施策</div>
+      <div class="col-card reveal">
+        <div class="col-thumb">💬</div>
+        <div class="col-body">
+          <div class="col-cat">LINE施策</div>
           <h3>リピーターを増やすLINEシナリオの作り方</h3>
           <p>一度買ってもらったお客様に再購入してもらうためのLINE活用法。</p>
         </div>
       </div>
-      <div class="column-card">
-        <div class="column-thumb">🎨</div>
-        <div class="column-body">
-          <div class="column-cat">商品ページ改善</div>
+      <div class="col-card reveal">
+        <div class="col-thumb">🎨</div>
+        <div class="col-body">
+          <div class="col-cat">商品ページ改善</div>
           <h3>転換率が上がる商品ページの「伝え方」</h3>
           <p>デザインより先に考えるべき「訴求軸」の設計について解説します。</p>
         </div>
       </div>
     </div>
-    <div style="text-align:center;">
-      <a href="#" class="btn btn--outline-dark btn--sm">コラムをもっと見る</a>
-    </div>
   </div>
 </section>
 
 <!-- COMPANY -->
-<section id="company" class="section">
-  <div class="container">
-    <div class="label">Company</div>
-    <h2 class="section-title">会社概要</h2>
-    <div class="company-wrap">
+<section id="company" class="company">
+  <div class="company-inner">
+    <div class="reveal">
+      <div class="sec-label" style="margin-bottom:32px;">Company</div>
       <table class="company-table">
         <tr><th>会社名</th><td>株式会社GREEN通商</td></tr>
         <tr><th>代表</th><td>溝口 真由子</td></tr>
-        <tr><th>設立</th><td>―</td></tr>
         <tr><th>社員数</th><td>3名</td></tr>
         <tr><th>所在地</th><td>〒262-0016<br>千葉県千葉市花見川区千種町230-12</td></tr>
         <tr><th>事業内容</th><td>EC伴走支援・楽天市場運営支援・SEO改善・商品ページ制作・LINE施策・CRM・広告改善・販促企画</td></tr>
         <tr><th>対応モール</th><td>楽天市場・Amazon・Yahoo!ショッピング・自社EC 他</td></tr>
-        <tr><th>メール</th><td><a href="mailto:info@green-tsusho.co.jp" style="color:var(--black);font-weight:700;">info@green-tsusho.co.jp</a></td></tr>
+        <tr><th>メール</th><td><a href="mailto:info@green-tsusho.co.jp" style="color:var(--off-black);font-weight:600;text-decoration:underline;text-underline-offset:3px;">info@green-tsusho.co.jp</a></td></tr>
       </table>
-      <div class="hoken-box">
-        <h3>あなたの会社の、<br>もう一人のメンバーでいたい。</h3>
-        <p>
-          クライアントの会社の一メンバーのような感覚で、
-          長年ずっとそうやって仕事をしてきました。
-          その積み重ねが、今のGREEN通商です。
-        </p>
-        <p>
-          楽しく働くことが大事だと思っています。
-          仕事がうまくいっているとき、現場はたいてい楽しくなっています。
-          だから数字だけでなく、現場の空気も大切にしています。
-        </p>
-        <p>
-          「試して、磨いて、強くなる。」<br>
-          一緒に、ECの"次"をつくりましょう。
-        </p>
-        <div class="hoken-sign">株式会社GREEN通商 代表 溝口 真由子</div>
+    </div>
+    <div class="company-message reveal">
+      <div class="company-message-quote">
+        「試して、磨いて、<em>強くなる。</em>」<br>
+        一緒に、ECの"次"を<br>つくりましょう。
       </div>
+      <p>クライアントの会社の一メンバーのような感覚で、長年ずっとそうやって仕事をしてきました。その積み重ねが、今のGREEN通商です。</p>
+      <p>楽しく働くことが大事だと思っています。仕事がうまくいっているとき、現場はたいてい楽しくなっています。だから数字だけでなく、現場の空気も大切にしています。</p>
+      <div class="company-message-sign">株式会社GREEN通商 代表 溝口 真由子</div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section section--white">
-  <div class="container">
-    <div class="contact-wrap">
-      <h2>まずは無料相談</h2>
-      <p>
-        どんな些細なことでも構いません。<br>
-        「これって相談していいのかな」という内容こそ、大歓迎です。<br>
-        現状を話してくれるだけで、一緒に整理します。
-      </p>
-      <form>
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <div class="contact-big">
+        まずは、<br><em>話して</em><br>みてください。
+      </div>
+      <p>どんな些細なことでも構いません。「これって相談していいのかな」という内容こそ、大歓迎です。現状を話してくれるだけで、一緒に整理します。</p>
+      <div class="contact-detail">
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Mail</span>
+          <span class="contact-detail-val">info@green-tsusho.co.jp</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">所在地</span>
+          <span class="contact-detail-val">千葉県千葉市花見川区千種町230-12</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">対応</span>
+          <span class="contact-detail-val">オンライン / 電話 / 対面</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right reveal">
+      <div class="contact-form">
         <div class="form-row">
           <label>会社名 / 店舗名<span class="req">必須</span></label>
           <input type="text" placeholder="株式会社〇〇 / 楽天〇〇店">
@@ -1209,32 +1734,46 @@
           <label>現状・お気持ちなど（任意）</label>
           <textarea placeholder="現状の課題、気になっていること、何でもお書きください。「うまくいかない気がする」でも大丈夫です。"></textarea>
         </div>
-        <button type="submit" class="form-submit">無料相談を申し込む →</button>
-        <p class="form-note">営業・押し売りは一切しません。お気軽にどうぞ。</p>
-      </form>
+        <button class="form-submit">無料相談を申し込む →</button>
+        <p class="form-note">営業・押し売りは一切しません</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-logo">GREEN通商</div>
-    <ul class="footer-links">
-      <li><a href="#about">溝口について</a></li>
-      <li><a href="#problems">お悩み</a></li>
-      <li><a href="#strengths">強み</a></li>
-      <li><a href="#green-kai">GREEN会</a></li>
-      <li><a href="#services">サービス</a></li>
-      <li><a href="#column">コラム</a></li>
-      <li><a href="#company">会社概要</a></li>
-      <li><a href="#contact">お問い合わせ</a></li>
-    </ul>
-  </div>
-  <div class="footer-copy">
-    &copy; 2024 株式会社GREEN通商. All Rights Reserved.
-  </div>
+  <div class="footer-logo">GREEN通商</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#strengths">強み</a></li>
+    <li><a href="#green-kai">GREEN会</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#column">Column</a></li>
+    <li><a href="#company">Company</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2024 株式会社GREEN通商</div>
 </footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal, .reveal-left');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // stagger siblings
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal, .reveal-left')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 80);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
